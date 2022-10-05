@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="top">
+    <div class="genres">
+
+    </div>
+    <div class="search">
+
+    </div>
+  </div>
+  <div class="cards">
+    <article class="card" *ngFor="let g of games">
+      <img [src]="g.imagePath" [alt]="g.name">
+      <div class="info">
+        <div class="price">
+          <p>${{g.price}}</p>
+          <div class="buy">
+            <p>BUY</p>
+          </div>
+        </div>
+        <div class="genres">
+          <span *ngFor="let ge of g.genres">{{ge}} /</span>
+          <p class="name">{{g.name}}</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
