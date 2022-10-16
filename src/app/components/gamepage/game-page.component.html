@@ -1,22 +1,22 @@
 <div class="container">
   <div class="game">
-    <img [src]="game.imagePath" [alt]="game.name">
+    <img [src]="game?.imagePath" [alt]="game?.name">
     <div class="header">
-      <div class="name"><p>{{game.name}}</p></div>
+      <div class="name"><p>{{game?.name}}</p></div>
       <div class="buy">
-        <p>${{game.price}}</p>
+        <p>${{game?.price}}</p>
         <button>BUY</button>
       </div>
     </div>
     <hr>
     <div class="genres">
-      <p class="genre" *ngFor="let g of game.genres">{{g}}</p>
+      <p class="genre" *ngFor="let g of game?.genres">{{g}}</p>
     </div>
     <div class="description">
-      <p>{{game.description}}</p>
+      <p>{{game?.description}}</p>
     </div>
     <div class="comments">
-      <div class="comment" *ngFor="let c of game.comments">
+      <div class="comment" *ngFor="let c of game?.comments">
         <div class="user">
           <span class="material-symbols-outlined">person </span>
           <p>{{c.author}}</p>

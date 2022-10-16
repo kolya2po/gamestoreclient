@@ -1,12 +1,64 @@
 .container {
   display: flex;
   flex-direction: column;
+  background-color: #1e1e1e;
+  color: white;
 }
 
 .container p {
   margin: 0;
 }
 
+/* Search and genres */
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  padding: 1% 2%;
+}
+
+.genres-search, .search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.genres-search:hover {
+  background-color: #323232;
+}
+
+.search, .search input {
+  background-color: #323232;
+  border: none;
+}
+
+/* Add game */
+
+.add-game {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 2%;
+  margin-top: 1%;
+}
+
+
+.add-game p {
+  background-color: #34b934;
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 2px;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+}
+
+/* Game cards */
 .cards {
   display: flex;
   flex-wrap: wrap;

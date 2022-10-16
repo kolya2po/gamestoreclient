@@ -1,14 +1,19 @@
 <div class="container">
   <div class="top">
-    <div class="genres">
-
+    <div class="genres-search">
+      <span class="material-symbols-outlined">add</span>
+      <p>Add genre</p>
     </div>
     <div class="search">
-
+        <span class="material-symbols-outlined">search</span>
+        <input type="text">
     </div>
   </div>
+  <div class="add-game">
+    <p>Add Game</p>
+  </div>
   <div class="cards">
-    <article class="card" *ngFor="let g of games">
+    <article class="card" *ngFor="let g of games" (click)="router.navigate(['game', g.id])">
       <img [src]="g.imagePath" [alt]="g.name">
       <div class="info">
         <div class="price">
