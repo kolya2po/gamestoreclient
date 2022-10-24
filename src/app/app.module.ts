@@ -8,20 +8,24 @@ import { GamePageComponent } from './components/gamepage/game-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule} from "./modules/AppRoutingModule";
 import { HttpClientModule} from "@angular/common/http";
+import { AddGameFormComponent } from './components/add-game-form/add-game-form.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomepageComponent,
-    GamePageComponent
+    GamePageComponent,
+    AddGameFormComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
