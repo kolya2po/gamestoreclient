@@ -40,7 +40,7 @@
            *ngIf="price.touched && price.invalid">Price is required.</p>
       </div>
       <div class="send">
-        <button [disabled]="create.invalid">Create game</button>
+        <button [disabled]="create.invalid" [ngClass]="create.invalid ? 'button' : 'button-blocked'">Create game</button>
       </div>
     </form>
   </div>

@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="changes" #change>
-        <div class="edit">
+        <div class="edit" (click)="router.navigate(['edit', g.id])">
           <span class="material-symbols-outlined">edit</span>
           <p>Edit</p>
         </div>

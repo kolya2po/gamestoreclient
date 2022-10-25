@@ -57,9 +57,14 @@
   margin-top: 5%;
 }
 
-button {
+button, .button-blocked {
   width: 100%;
   color: white;
   font-size: 20px;
   border-radius: 4px;
+}
+
+.button-blocked {
+  background-color: red;
+  width: 100%;
 }

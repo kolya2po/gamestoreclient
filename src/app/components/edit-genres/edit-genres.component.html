@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="selected" *ngIf="game.genres!.length !== 0">
+    <p>Selected genres:</p>
+    <div class="genre" *ngFor="let g of game.genres">
+      <span class="material-symbols-outlined">radio_button_checked</span>
+      <p>{{g}}</p>
+    </div>
+  </div>
+  <div class="add-genre">
+    <div class="name">
+      <p>Add genre</p>
+    </div>
+    <div class="show" (click)="isAdding = !isAdding">
+      <p>Add</p>
+    </div>
+  </div>
+  <div class="adding-genre" *ngIf="isAdding">
+    <form (ngSubmit)="addGenre()">
+      <div class="input">
+        <label>Select genre</label>
+        <mat-select [(ngModel)]="idToAdd" name="id">
+          <mat-option *ngFor="let genre of genres" [value]="genre.id">
+            {{genre.name}}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div class="send">
+        <button [disabled]="idToAdd === 0"
+                [style.background-color]="idToAdd === 0 ? 'red' : '#34b934'">Add
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="remove-genre">
+    <div class="name">
+      <p>Remove genre</p>
+    </div>
+    <div class="show" (click)="isRemoving = !isRemoving">
+      <p>Remove</p>
+    </div>
+  </div>
+  <div class="adding-genre" *ngIf="isRemoving">
+    <form (ngSubmit)="removeGenre()">
+      <div class="input">
+        <label>Select genre</label>
+        <mat-select [(ngModel)]="nameToRemove" name="id">
+          <mat-option *ngFor="let genre of game.genres" [value]="genre">
+            {{genre}}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div class="send">
+        <button [disabled]="nameToRemove === ''"
+                [style.background-color]="nameToRemove === '' ? 'red' : '#34b934'">Remove
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

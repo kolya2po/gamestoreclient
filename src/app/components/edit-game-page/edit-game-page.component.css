@@ -1,0 +1,27 @@
+.container {
+  height: 85vh;
+  overflow-y: scroll;
+  background-color: #1e1e1e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container p {
+  margin: 0;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.content {
+  width: 70vw;
+  background-color: black;
+  padding: 1%;
+  border-radius: 4px;
+}
+
+

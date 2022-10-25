@@ -10,6 +10,9 @@ import { AppRoutingModule} from "./modules/AppRoutingModule";
 import { HttpClientModule} from "@angular/common/http";
 import { AddGameFormComponent } from './components/add-game-form/add-game-form.component';
 import {FormsModule} from "@angular/forms";
+import { EditGamePageComponent } from './components/edit-game-page/edit-game-page.component';
+import {MatSelectModule} from "@angular/material/select";
+import { EditGenresComponent } from './components/edit-genres/edit-genres.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +20,17 @@ import {FormsModule} from "@angular/forms";
     HeaderComponent,
     HomepageComponent,
     GamePageComponent,
-    AddGameFormComponent
+    AddGameFormComponent,
+    EditGamePageComponent,
+    EditGenresComponent
   ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        MatSelectModule
     ],
   providers: [],
   bootstrap: [AppComponent]

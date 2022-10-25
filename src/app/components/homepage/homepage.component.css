@@ -6,7 +6,9 @@
   overflow-y: scroll;
   height: 85vh;
 }
-
+.container::-webkit-scrollbar {
+  display: none;
+}
 .container p {
   margin: 0;
 }
