@@ -10,10 +10,14 @@
     </div>
   </div>
   <div class="add-game" (click)="router.navigate(['add-game'])">
-    <p>Add Game</p>
+    <div class="add-button">
+      <p>Add Game</p>
+    </div>
   </div>
   <div class="cards">
-    <article class="card" *ngFor="let g of games" (click)="router.navigate(['game', g.id])">
+    <article class="card" *ngFor="let g of games"
+             (click)="router.navigate(['game', g.id])"
+              (mouseover)="change.style.display">
       <img [src]="g.imagePath" [alt]="g.name">
       <div class="info">
         <div class="price">
@@ -23,8 +27,22 @@
           </div>
         </div>
         <div class="genres">
-          <span *ngFor="let ge of g.genres">{{ge}} /</span>
-          <p class="name">{{g.name}}</p>
+          <div class="genre" *ngFor="let ge of g.genres">
+            <p>{{ge}}</p>
+          </div>
+        </div>
+        <div class="name">
+          <p>{{g.name}}</p>
+        </div>
+      </div>
+      <div class="changes" #change>
+        <div class="edit">
+          <span class="material-symbols-outlined">edit</span>
+          <p>Edit</p>
+        </div>
+        <div class="delete">
+          <span class="material-symbols-outlined">delete</span>
+          <p>Delete</p>
         </div>
       </div>
     </article>

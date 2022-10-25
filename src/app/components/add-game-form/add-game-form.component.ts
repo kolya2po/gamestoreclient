@@ -16,7 +16,7 @@ export class AddGameFormComponent {
   async createGame() {
     // will change this when as soon as I get working authentication
     this.game.authorId = 1;
-
+    console.log("sadas");
     this.gs.create(this.game)
       .subscribe();
     await this.delay(1000);

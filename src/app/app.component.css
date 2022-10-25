@@ -4,7 +4,9 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1%;
+  align-items: center;
+  padding: 0 3%;
+  height: 5vh;
 }
 
 footer p {

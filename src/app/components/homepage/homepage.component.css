@@ -3,6 +3,8 @@
   flex-direction: column;
   background-color: #1e1e1e;
   color: white;
+  overflow-y: scroll;
+  height: 85vh;
 }
 
 .container p {
@@ -47,15 +49,16 @@
   margin-top: 1%;
 }
 
-
-.add-game p {
+.add-button {
   background-color: #34b934;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 500;
   border-radius: 2px;
-  width: 100px;
-  height: 30px;
-  text-align: center;
+  height: 5vh;
+  padding: 0 1%;
 }
 
 /* Game cards */
@@ -66,23 +69,28 @@
 }
 
 .card {
+  position: relative;
   margin: 1%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  max-width: 35%;
+  height: 60vh;
+  min-width: 20vw;
+  backface-visibility: hidden;
+  padding-bottom: 1%;
 }
 
 .card img {
-  max-width: 100%;
-  min-height: 80%;
+  max-width: 40vw;
+  min-height: 48vh;
+  max-height: 48vh;
   cursor: pointer;
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  padding: 1% 3%;
-  height: 100px;
+  height: 12vh;
+  padding: 0 1%;
 }
 
 .price {
@@ -107,8 +115,51 @@
   cursor: pointer;
 }
 
-.genres p {
-  font-size: 18px;
-  font-weight: 600;
-  font-family: 'Roboto 300', sans-serif;
+.genres {
+  display: flex;
+  flex-direction: row;
+  gap: 1%;
+  height: 5vh;
 }
+
+.genre {
+  background-color: #5097f3;
+  border-radius: 10px;
+  font-family: 'Roboto 300', sans-serif;
+  padding: 0 1%;
+  height: 3vh;
+}
+
+.name {
+  font-family: 'Roboto 300', sans-serif;
+  font-size: 25px;
+}
+
+.card img:hover {
+  opacity: 0.2;
+}
+
+.card:hover .changes {
+  opacity: 1;
+}
+
+.changes {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  opacity: 0;
+  font-size: 30px;
+  color: red;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.edit, .delete {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+
