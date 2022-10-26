@@ -13,6 +13,8 @@ import {FormsModule} from "@angular/forms";
 import { EditGamePageComponent } from './components/edit-game-page/edit-game-page.component';
 import {MatSelectModule} from "@angular/material/select";
 import { EditGenresComponent } from './components/edit-genres/edit-genres.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { AddImageComponent } from './components/add-image/add-image.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { EditGenresComponent } from './components/edit-genres/edit-genres.compon
     GamePageComponent,
     AddGameFormComponent,
     EditGamePageComponent,
-    EditGenresComponent
+    EditGenresComponent,
+    SearchFilterPipe,
+    AddImageComponent
   ],
     imports: [
         BrowserModule,

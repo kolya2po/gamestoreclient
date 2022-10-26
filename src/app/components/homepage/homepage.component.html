@@ -1,21 +1,27 @@
 <div class="container">
   <div class="top">
-    <div class="genres-search">
-      <span class="material-symbols-outlined">add</span>
-      <p>Add genre</p>
-    </div>
+      <div class="genres-search" (click)="tagIsPressed = !tagIsPressed">
+        <span class="material-symbols-outlined">add</span>
+        <p>Add genre</p>
+      </div>
+      <div class="choose-genre" *ngIf="tagIsPressed">
+        <div class="genre" *ngFor="let g of genres">
+          <input (change)="onChangeGenre($event, g.name)" name="{{ g.name }}" type="checkbox" id="{{g.name}}">
+          <label for="{{g.name}}">{{g.name}}</label>
+        </div>
+      </div>
     <div class="search">
         <span class="material-symbols-outlined">search</span>
-        <input type="text">
+        <input type="text" [(ngModel)]="search">
     </div>
   </div>
-  <div class="add-game" (click)="router.navigate(['add-game'])">
-    <div class="add-button">
+  <div class="add-game">
+    <div class="add-button" (click)="router.navigate(['add-game'])">
       <p>Add Game</p>
     </div>
   </div>
   <div class="cards">
-    <article class="card" *ngFor="let g of games"
+    <article class="card" *ngFor="let g of games | searchFilter: search"
               (mouseover)="change.style.display">
       <img [src]="g.imagePath" [alt]="g.name">
       <div class="info" (click)="router.navigate(['game', g.id])">
