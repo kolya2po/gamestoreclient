@@ -24,19 +24,23 @@ export class EditGenresComponent implements OnInit {
 
   addGenre() {
     let genre = this.genres.find(c => c.id == this.idToAdd);
-    let genreFromGame = this.game.genres?.find(c => c == genre!.name);
+    let genreFromGame = this.game.genres?.find(c => c == <string>genre!.name);
     if (genreFromGame === undefined)
     {
       this.game.genres!.push(<string>genre!.name);
-      this.gs.linkGenreToGame(<number>this.game.id, <Genre>genre);
-      this.idToAdd = 0;
+      this.gs.linkGenreToGame(<number>this.game.id, <Genre>genre)
+        .subscribe(() => {
+          this.idToAdd = 0;
+        });
     }
   }
 
   removeGenre() {
     let genre = this.genres.find(c => c.name === this.nameToRemove);
-    this.gs.unlinkGenreFromGame(<number>this.game!.id, <number>genre!.id);
-    this.game.genres = this.game.genres!.filter(c => c !== this.nameToRemove);
-    this.nameToRemove = '';
+    this.gs.unlinkGenreFromGame(<number>this.game!.id, <number>genre!.id)
+      .subscribe(() => {
+        this.game.genres = this.game.genres!.filter(c => c !== this.nameToRemove);
+        this.nameToRemove = '';
+    });
   }
 }

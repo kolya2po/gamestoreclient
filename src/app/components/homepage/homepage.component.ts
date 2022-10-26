@@ -9,12 +9,18 @@ import {Router} from "@angular/router";
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-   games: Game[] = [];
+  games: Game[] = [];
 
   constructor(private gs: GamesService,
               public router: Router) { }
 
   ngOnInit(): void {
     this.gs.getAll().subscribe((data: Game[]) => this.games = data);
+  }
+
+  delete(id: number | undefined) {
+    this.gs.delete(<number>id!).subscribe(() => {
+      this.games = this.games.filter(g => g.id !== id);
+    });
   }
 }

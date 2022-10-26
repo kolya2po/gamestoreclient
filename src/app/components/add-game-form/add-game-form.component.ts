@@ -14,9 +14,12 @@ export class AddGameFormComponent {
   constructor(private router: Router, private gs: GamesService) { }
 
   async createGame() {
+    if (!this.gameIsValid()) {
+      return;
+    }
+
     // will change this when as soon as I get working authentication
     this.game.authorId = 1;
-    console.log("sadas");
     this.gs.create(this.game)
       .subscribe();
     await this.delay(1000);
@@ -26,5 +29,10 @@ export class AddGameFormComponent {
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  gameIsValid(): boolean {
+    return this.game.name !== undefined && this.game.description !== undefined
+      && this.game.price !== 0 && <number>this.game.price > 0;
   }
 }

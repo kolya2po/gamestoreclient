@@ -1,5 +1,14 @@
 <div class="container">
   <div class="content">
+    <div class="game">
+      <div class="name">
+        <p>{{game.name}}</p>
+        <p>${{game.price}}</p>
+      </div>
+      <div class="description">
+        <p>{{game.description}}</p>
+      </div>
+    </div>
     <app-edit-genres [game]="game"></app-edit-genres>
   </div>
 </div>

@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="adding-genre" *ngIf="isAdding">
-    <form (ngSubmit)="addGenre()">
+    <form>
       <div class="input">
         <label>Select genre</label>
         <mat-select [(ngModel)]="idToAdd" name="id">
@@ -26,7 +26,8 @@
       </div>
       <div class="send">
         <button [disabled]="idToAdd === 0"
-                [style.background-color]="idToAdd === 0 ? 'red' : '#34b934'">Add
+                [style.background-color]="idToAdd === 0 ? 'red' : '#34b934'"
+                (click)="addGenre()">Add
         </button>
       </div>
     </form>

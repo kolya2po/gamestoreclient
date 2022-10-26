@@ -22,4 +22,8 @@ export class GamesService {
   public create(game: CreateGame) {
     return this.http.post<Game>(this.url, game);
   }
+
+  public delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

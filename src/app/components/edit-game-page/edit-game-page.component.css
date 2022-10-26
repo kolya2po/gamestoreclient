@@ -19,9 +19,33 @@
 
 .content {
   width: 70vw;
-  background-color: black;
   padding: 1%;
-  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
 }
+
+.game {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  gap: 1vh;
+  width: 70vw;
+}
+
+.name {
+  padding: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.description {
+  padding: 0 1% 1%;
+}
+
 
 
