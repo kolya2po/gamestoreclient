@@ -16,10 +16,9 @@
   </div>
   <div class="cards">
     <article class="card" *ngFor="let g of games"
-             (click)="router.navigate(['game', g.id])"
               (mouseover)="change.style.display">
       <img [src]="g.imagePath" [alt]="g.name">
-      <div class="info">
+      <div class="info" (click)="router.navigate(['game', g.id])">
         <div class="price">
           <p>${{g.price}}</p>
           <div class="buy">
@@ -40,7 +39,7 @@
           <span class="material-symbols-outlined">edit</span>
           <p>Edit</p>
         </div>
-        <div class="delete">
+        <div class="delete" (click)="delete(g.id)">
           <span class="material-symbols-outlined">delete</span>
           <p>Delete</p>
         </div>
