@@ -26,4 +26,10 @@ export class GamesService {
   public delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
+
+  public addImage(id: number, image: File) {
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(`${this.url}/${id}/image`, formData);
+  }
 }

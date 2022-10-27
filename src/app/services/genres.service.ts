@@ -5,7 +5,7 @@ import {Genre} from "../models/genre/genre";
 @Injectable({
   providedIn: 'root'
 })
-export class GenresserviceService {
+export class GenresService {
   private url = 'https://localhost:5001/api/genres';
   private gameUrl = 'https://localhost:5001/api/games';
 

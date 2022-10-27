@@ -15,6 +15,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { EditGenresComponent } from './components/edit-genres/edit-genres.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { AddImageComponent } from './components/add-image/add-image.component';
+import { GenresSearchFilterPipe } from './pipes/genres-search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AddImageComponent } from './components/add-image/add-image.component';
     EditGamePageComponent,
     EditGenresComponent,
     SearchFilterPipe,
-    AddImageComponent
+    AddImageComponent,
+    GenresSearchFilterPipe
   ],
     imports: [
         BrowserModule,

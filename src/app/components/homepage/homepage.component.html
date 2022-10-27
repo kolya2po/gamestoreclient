@@ -5,8 +5,8 @@
         <p>Add genre</p>
       </div>
       <div class="choose-genre" *ngIf="tagIsPressed">
-        <div class="genre" *ngFor="let g of genres">
-          <input (change)="onChangeGenre($event, g.name)" name="{{ g.name }}" type="checkbox" id="{{g.name}}">
+        <div class="item" *ngFor="let g of genres">
+          <input (change)="onChangeGenre(g.name)" name="{{ g.name }}" type="checkbox" id="{{g.name}}">
           <label for="{{g.name}}">{{g.name}}</label>
         </div>
       </div>
@@ -21,9 +21,10 @@
     </div>
   </div>
   <div class="cards">
-    <article class="card" *ngFor="let g of games | searchFilter: search"
-              (mouseover)="change.style.display">
-      <img [src]="g.imagePath" [alt]="g.name">
+    <article class="card" *ngFor="let g of games | searchFilter: search | genresSearchFilter: genresToFind"
+              (mouseover)="change.style.opacity = '1'; img.style.opacity = '0.2'"
+              (mouseleave)="change.style.opacity = '0'; img.style.opacity = '1'">
+      <img [src]="g.imagePath" [alt]="g.name" #img>
       <div class="info" (click)="router.navigate(['game', g.id])">
         <div class="price">
           <p>${{g.price}}</p>

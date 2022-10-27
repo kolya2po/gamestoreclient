@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Genre} from "../../models/genre/genre";
-import {GenresserviceService} from "../../services/genresservice.service";
+import {GenresService} from "../../services/genres.service";
 import {Game} from "../../models/game/game";
 
 @Component({
@@ -16,7 +16,7 @@ export class EditGenresComponent implements OnInit {
   nameToRemove = '';
   genres: Genre[] = [];
 
-  constructor(private gs: GenresserviceService) { }
+  constructor(private gs: GenresService) { }
 
   ngOnInit(): void {
     this.gs.getAll().subscribe(data => this.genres = data);

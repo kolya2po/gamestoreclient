@@ -3,6 +3,7 @@ import {Game} from "../../models/game/game";
 import {GamesService} from "../../services/gamesservice.service";
 import {Router} from "@angular/router";
 import {Genre} from "../../models/genre/genre";
+import {GenresService} from "../../services/genres.service";
 
 @Component({
   selector: 'app-homepage',
@@ -16,10 +17,12 @@ export class HomepageComponent implements OnInit {
   tagIsPressed = false;
   search = '';
   constructor(private gs: GamesService,
-              public router: Router) { }
+              public router: Router,
+              private genresService: GenresService) { }
 
   ngOnInit(): void {
     this.gs.getAll().subscribe((data: Game[]) => this.games = data);
+    this.genresService.getAll().subscribe((data: Genre[]) => this.genres = data);
   }
 
   delete(id: number | undefined) {
@@ -28,7 +31,12 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  onChangeGenre(event : Event, genre: any) {
-    this.genresToFind.push(genre.name);
+  onChangeGenre(genre: any) {
+    if (!this.genresToFind.includes(genre)) {
+      this.genresToFind.push(genre);
+      this.genresToFind = [...this.genresToFind];
+    } else {
+      this.genresToFind = this.genresToFind.filter(g => g !== genre);
+    }
   }
 }

@@ -28,7 +28,17 @@
 
 .choose-genre {
   position: absolute;
+  top: 15vh;
+  width: 15vw;
+  background-color: #cccccc;
+  color: black;
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: auto auto;
+  z-index: 999;
+  padding: 1%;
 }
+
 .genres-search, .search {
   display: flex;
   flex-direction: row;
@@ -144,14 +154,6 @@
 .name {
   font-family: 'Roboto 300', sans-serif;
   font-size: 25px;
-}
-
-.card img:hover {
-  opacity: 0.2;
-}
-
-.card:hover .changes {
-  opacity: 1;
 }
 
 .changes {
