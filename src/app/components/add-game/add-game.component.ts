@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import {CreateGame} from "../../models/game/create-game";
 import {Router} from "@angular/router";
-import {GamesService} from "../../services/gamesservice.service";
+import {GamesService} from "../../services/games.service";
 
 @Component({
-  selector: 'app-add-game-form',
-  templateUrl: './add-game-form.component.html',
-  styleUrls: ['./add-game-form.component.css']
+  selector: 'app-add-game',
+  templateUrl: './add-game.component.html',
+  styleUrls: ['./add-game.component.css']
 })
-export class AddGameFormComponent {
+export class AddGameComponent {
   game: CreateGame = new CreateGame();
 
   constructor(private router: Router, private gs: GamesService) { }

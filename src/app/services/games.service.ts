@@ -23,6 +23,10 @@ export class GamesService {
     return this.http.post<Game>(this.url, game);
   }
 
+  public update(game: Game) {
+    return this.http.put(this.url, game);
+  }
+
   public delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
@@ -30,6 +34,6 @@ export class GamesService {
   public addImage(id: number, image: File) {
     const formData = new FormData();
     formData.append('image', image);
-    return this.http.post(`${this.url}/${id}/image`, formData);
+    return this.http.post<string>(`${this.url}/${id}/image`, formData);
   }
 }

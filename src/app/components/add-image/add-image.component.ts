@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Game} from "../../models/game/game";
-import {GamesService} from "../../services/gamesservice.service";
+import {GamesService} from "../../services/games.service";
 
 @Component({
   selector: 'app-add-image',
