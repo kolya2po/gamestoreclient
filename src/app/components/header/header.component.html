@@ -10,15 +10,21 @@
     <p>Support</p>
   </div>
   <div class="right">
-    <div class="user">
-      <img src="" alt="avatar">
-      <p>Name</p>
+    <div class="user" *ngIf="us.user?.id !== undefined">
+      <img [src]="us.user?.avatarImagePath" alt="">
+      <p>{{us.user!.firstName}}</p>
+      <p>{{us.user!.lastName}}</p>
     </div>
     <div class="cart">
       <span class="material-symbols-outlined">shopping_cart</span>
       <p>3</p>
     </div>
-    <span class="material-symbols-outlined">logout</span>
-    <p>Sign in</p>
+    <div class="logout" *ngIf="us.user?.id !== undefined" (click)="us.logout()">
+      <span class="material-symbols-outlined">logout</span>
+    </div>
+    <div class="sign-in" *ngIf="us.user?.id === undefined"
+         (click)="router.navigate(['login'])">
+      <p>Sign in</p>
+    </div>
   </div>
 </div>

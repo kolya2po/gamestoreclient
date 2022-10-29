@@ -17,6 +17,10 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { AddImageComponent } from './components/add-image/add-image.component';
 import { GenresSearchFilterPipe } from './pipes/genres-search-filter.pipe';
 import { EditGameComponent } from './components/edit-game/edit-game.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { EditGameComponent } from './components/edit-game/edit-game.component';
     SearchFilterPipe,
     AddImageComponent,
     GenresSearchFilterPipe,
-    EditGameComponent
+    EditGameComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
     imports: [
         BrowserModule,
@@ -38,7 +44,16 @@ import { EditGameComponent } from './components/edit-game/edit-game.component';
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSnackBarModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('auth_token');
+            },
+            allowedDomains: ['localhost:5001']
+          }
+        })
     ],
   providers: [],
   bootstrap: [AppComponent]

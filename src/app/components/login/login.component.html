@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="content">
+    <div class="top">
+      <p>Login</p>
+    </div>
+    <form #loginForm="ngForm">
+      <div class="input">
+        <label for="userName">Input username</label>
+        <input id="userName" name="userName"
+        required
+        [(ngModel)]="loginModel.userName"
+        #userName="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="userName.touched && userName.invalid">Username is required.</p>
+      </div>
+      <div class="input">
+        <label for="password">Input password</label>
+        <input type="password" id="password" name="password"
+               required
+               [(ngModel)]="loginModel.password"
+               #userName="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="userName.touched && userName.invalid">Password is required.</p>
+      </div>
+      <div class="input">
+        <button [style.background-color]="inputIsValid() ? '#34b934' : 'red'"
+                (click)="login()">Login</button>
+      </div>
+    </form>
+    <div class="bottom">
+      <p>Don't have account?</p>
+      <p class="register" (click)="router.navigate(['registration'])">Register</p>
+    </div>
+  </div>
+</div>
