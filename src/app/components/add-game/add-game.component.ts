@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {CreateGame} from "../../models/game/create-game";
 import {Router} from "@angular/router";
 import {GamesService} from "../../services/games.service";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: 'app-add-game',
@@ -11,15 +12,14 @@ import {GamesService} from "../../services/games.service";
 export class AddGameComponent {
   game: CreateGame = new CreateGame();
 
-  constructor(private router: Router, private gs: GamesService) { }
+  constructor(private router: Router, private gs: GamesService,
+              private us: UsersService) { }
 
   async createGame() {
     if (!this.gameIsValid()) {
       return;
     }
-
-    // will change this when as soon as I get working authentication
-    this.game.authorId = 1;
+    this.game.authorId = this.us.user.id;
     this.gs.create(this.game)
       .subscribe();
     await this.delay(1000);

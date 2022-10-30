@@ -4,6 +4,7 @@ import {GamesService} from "../../services/games.service";
 import {Router} from "@angular/router";
 import {Genre} from "../../models/genre/genre";
 import {GenresService} from "../../services/genres.service";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: 'app-homepage',
@@ -18,7 +19,8 @@ export class HomepageComponent implements OnInit {
   search = '';
   constructor(private gs: GamesService,
               public router: Router,
-              private genresService: GenresService) { }
+              private genresService: GenresService,
+              public us: UsersService) { }
 
   ngOnInit(): void {
     this.gs.getAll().subscribe((data: Game[]) => this.games = data);
@@ -37,6 +39,13 @@ export class HomepageComponent implements OnInit {
       this.genresToFind = [...this.genresToFind];
     } else {
       this.genresToFind = this.genresToFind.filter(g => g !== genre);
+    }
+  }
+
+  showControls(auhorId: number, img: HTMLImageElement, control: HTMLDivElement) {
+    if (this.us.user.id === auhorId) {
+      img.style.opacity = '0.2';
+      control.style.opacity = '1';
     }
   }
 }

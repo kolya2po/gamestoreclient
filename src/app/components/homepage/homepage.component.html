@@ -15,15 +15,15 @@
         <input type="text" [(ngModel)]="search">
     </div>
   </div>
-  <div class="add-game">
+  <div class="add-game" *ngIf="us.user.id !== undefined">
     <div class="add-button" (click)="router.navigate(['add-game'])">
       <p>Add Game</p>
     </div>
   </div>
   <div class="cards">
     <article class="card" *ngFor="let g of games | searchFilter: search | genresSearchFilter: genresToFind"
-              (mouseover)="change.style.opacity = '1'; img.style.opacity = '0.2'"
-              (mouseleave)="change.style.opacity = '0'; img.style.opacity = '1'">
+             (mouseover)="showControls(g.authorId!, img, changes)"
+             (mouseleave)="img.style.opacity = '1'; changes.style.opacity = '0'">
       <img [src]="g.imagePath" [alt]="g.name" #img>
       <div class="info" (click)="router.navigate(['game', g.id])">
         <div class="price">
@@ -41,12 +41,14 @@
           <p>{{g.name}}</p>
         </div>
       </div>
-      <div class="changes" #change>
-        <div class="edit" (click)="router.navigate(['edit', g.id])">
+      <div class="changes" #changes>
+        <div class="edit" (click)="router.navigate(['edit', g.id])"
+                          *ngIf="us.user.id === g.authorId">
           <span class="material-symbols-outlined">edit</span>
           <p>Edit</p>
         </div>
-        <div class="delete" (click)="delete(g.id)">
+        <div class="delete" (click)="delete(g.id)"
+             *ngIf="us.user.id === g.authorId">
           <span class="material-symbols-outlined">delete</span>
           <p>Delete</p>
         </div>

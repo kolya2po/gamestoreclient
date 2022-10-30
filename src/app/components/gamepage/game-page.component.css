@@ -1,8 +1,12 @@
 .container {
-  padding: 2% 3%;
   background-color: #1e1e1e;
   color: white;
   height: 85vh;
+  overflow-y: scroll;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
 }
 
 .game p {
@@ -12,10 +16,17 @@
 .game {
   display: flex;
   flex-direction: column;
+  padding: 2% 3%;
+}
+
+.image {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 img {
-  width: 100%;
+  max-height: 60vh;
 }
 
 /* Name, price, buy */

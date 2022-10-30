@@ -1,7 +1,7 @@
 <div class="content">
   <div class="page">
     <div class="header">
-      <p>Create game</p>
+      <p>Edit game</p>
     </div>
     <form #create="ngForm">
       <div class="input">
@@ -45,7 +45,7 @@
       </div>
       <div class="send">
         <button type="submit" [disabled]="create.invalid" [style.background-color]="create.invalid ? 'red' : '#34b934'"
-                (click)="updateGame()">Create game</button>
+                (click)="updateGame()">Update game</button>
       </div>
     </form>
   </div>
