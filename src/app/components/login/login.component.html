@@ -22,6 +22,11 @@
         <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
            *ngIf="password.touched && password.invalid">Password is required.</p>
       </div>
+      <div class="isPersistent">
+        <label for="isPersistent">Remember me</label>
+        <input type="checkbox" id="isPersistent" name="isPersistent"
+               [(ngModel)]="loginModel.isPersistent">
+      </div>
       <div class="input">
         <button [style.background-color]="inputIsValid() ? '#34b934' : 'red'"
                 (click)="login()">Login</button>

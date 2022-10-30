@@ -43,6 +43,7 @@ export class UsersService {
         throw err;
       }))
       .subscribe(dto => {
+        this.saveToCookies(dto);
         this.handleReturnedDto(dto);
       });
   }
@@ -56,6 +57,9 @@ export class UsersService {
         throw err;
       }))
       .subscribe((dto) => {
+        if (model.isPersistent) {
+          this.saveToCookies(dto);
+        }
         this.handleReturnedDto(dto);
       });
   }
@@ -78,7 +82,6 @@ export class UsersService {
       return;
     }
     localStorage.setItem('auth_token', dto.token);
-    this.saveToCookies(dto);
 
     this.getById(dto.userId)
       .subscribe(u => {
@@ -89,6 +92,9 @@ export class UsersService {
   }
 
   saveToCookies(dto: UserDto) {
+    if (dto === null) {
+      return;
+    }
     this.cookieService.set('auth_token', dto.token!,
       new Date(new Date().setHours(new Date().getHours() + 3)));
     this.cookieService.set('id', dto.userId.toString());

@@ -17,6 +17,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.inputIsValid()) {
+      if (this.loginModel.isPersistent === undefined) {
+        this.loginModel.isPersistent = false;
+      }
       this.us.login(this.loginModel);
     }
   }
