@@ -35,7 +35,7 @@ export class UsersService {
   }
 
   public register(model: RegistrationModel) {
-    return this.http.post<UserDto>(this.url + '/registration', model)
+    return this.http.post<UserDto>(this.url + '/register', model)
       .pipe(tap(() => {
       }), catchError((err) => {
         let resp = new HttpErrorResponse(err);

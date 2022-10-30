@@ -3,7 +3,7 @@
     <div class="top">
       <p>Login</p>
     </div>
-    <form #loginForm="ngForm">
+    <form>
       <div class="input">
         <label for="userName">Input username</label>
         <input id="userName" name="userName"
@@ -18,9 +18,9 @@
         <input type="password" id="password" name="password"
                required
                [(ngModel)]="loginModel.password"
-               #userName="ngModel">
+               #password="ngModel">
         <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
-           *ngIf="userName.touched && userName.invalid">Password is required.</p>
+           *ngIf="password.touched && password.invalid">Password is required.</p>
       </div>
       <div class="input">
         <button [style.background-color]="inputIsValid() ? '#34b934' : 'red'"

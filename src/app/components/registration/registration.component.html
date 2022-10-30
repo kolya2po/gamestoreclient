@@ -1,27 +1,59 @@
 <div class="container">
-  <form>
-    <div class="input">
-      <label for="firstName">Input first name</label>
-      <input id="firstName" name="firstName">
+  <div class="content">
+    <div class="top">
+      <p>Registration</p>
     </div>
-    <div class="input">
-      <label for="lastName">Input first name</label>
-      <input id="lastName" name="lastName">
-    </div>
-    <div class="input">
-      <label for="userName">Input first name</label>
-      <input id="userName" name="userName">
-    </div>
-    <div class="input">
-      <label for="email">Input first name</label>
-      <input id="email" name="email">
-    </div>
-    <div class="input">
-      <label for="password">Input first name</label>
-      <input id="password" name="password">
-    </div>
-    <div class="register">
-      <button>Register</button>
-    </div>
-  </form>
+    <form>
+      <div class="input">
+        <label for="firstName">Input first name</label>
+        <input id="firstName" name="firstName"
+               required
+               [(ngModel)]="registrationModel.firstName"
+               #firstName="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="firstName.touched && firstName.invalid">First name is required.</p>
+      </div>
+      <div class="input">
+        <label for="lastName">Input last name</label>
+        <input id="lastName" name="lastName"
+               required
+               [(ngModel)]="registrationModel.lastName"
+               #lastName="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="lastName.touched && lastName.invalid">Last name is required.</p>
+      </div>
+      <div class="input">
+        <label for="userName">Input username</label>
+        <input id="userName" name="userName"
+               required
+               [(ngModel)]="registrationModel.userName"
+               #userName="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="userName.touched && userName.invalid">Username is required.</p>
+      </div>
+      <div class="input">
+        <label for="email">Input email</label>
+        <input id="email" name="email"
+               type="email"
+               required
+               [(ngModel)]="registrationModel.email"
+               #email="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="email.touched && email.invalid">Email is required.</p>
+      </div>
+      <div class="input">
+        <label for="password">Input password</label>
+        <input type="password" id="password" name="password"
+               required
+               [(ngModel)]="registrationModel.password"
+               #password="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="password.touched && password.invalid">Password is required.</p>
+      </div>
+      <div class="input">
+        <button [style.background-color]="inputIsValid() ? '#34b934' : 'red'"
+                (click)="register()">Register</button>
+      </div>
+    </form>
+  </div>
 </div>
