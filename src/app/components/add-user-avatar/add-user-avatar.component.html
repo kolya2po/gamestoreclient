@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="image" *ngIf="us.user.avatarImagePath !== ''">
+    <img [src]="us.user.avatarImagePath" alt="">
+  </div>
+  <div class="add-image">
+    <div class="name">
+      <p>Add Image</p>
+    </div>
+    <div class="show" (click)="isAdding = !isAdding">
+      <p>Add</p>
+    </div>
+  </div>
+  <div class="adding-image" *ngIf="isAdding">
+    <form action="">
+      <div class="input">
+        <label for="image">Select an image</label>
+        <input type="file" name="image" id="image" (change)="setFile($event)">
+      </div>
+      <div class="send">
+        <button [disabled]="image === undefined"
+                [style.background-color]="image === undefined ? 'red' : '#34b934'"
+                (click)="addImage()">Add</button>
+      </div>
+    </form>
+  </div>
+</div>

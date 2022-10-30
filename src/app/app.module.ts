@@ -21,6 +21,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatSnackBarModule} from "@angular/material/snack-bar";
+import { AddUserAvatarComponent } from './components/add-user-avatar/add-user-avatar.component';
+import { EditUserPageComponent } from './components/edit-user-page/edit-user-page.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { MatSnackBarModule} from "@angular/material/snack-bar";
     GenresSearchFilterPipe,
     EditGameComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    AddUserAvatarComponent,
+    EditUserPageComponent
   ],
     imports: [
         BrowserModule,

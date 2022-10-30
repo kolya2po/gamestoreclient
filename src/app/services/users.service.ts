@@ -34,6 +34,12 @@ export class UsersService {
     return this.http.get<User>(`${this.url}/${id}`)
   }
 
+  public addAvatar(image: File) {
+    const formData = new FormData();
+    formData.append('avatar', image);
+    return this.http.post<string>(`${this.url}/${this.user.id}/avatar`, formData);
+  }
+
   public register(model: RegistrationModel) {
     return this.http.post<UserDto>(this.url + '/register', model)
       .pipe(tap(() => {

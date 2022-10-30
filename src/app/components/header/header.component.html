@@ -10,7 +10,7 @@
     <p>Support</p>
   </div>
   <div class="right">
-    <div class="user" *ngIf="us.user?.id !== undefined">
+    <div class="user" *ngIf="us.user?.id !== undefined" (click)="router.navigate(['edit-user'])">
       <img [src]="us.user?.avatarImagePath" alt="">
       <p>{{us.user!.firstName}}</p>
       <p>{{us.user!.lastName}}</p>

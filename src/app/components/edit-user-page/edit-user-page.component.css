@@ -1,0 +1,24 @@
+.container {
+  overflow-y: scroll;
+  height: 85vh;
+  background-color: #1e1e1e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container p {
+  margin: 0;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  padding: 1%;
+}
