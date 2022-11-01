@@ -18,5 +18,4 @@ export class GamePageComponent implements OnInit {
     console.log(id);
     this.gs.getById(id).subscribe(data => this.game = data);
   }
-
 }

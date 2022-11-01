@@ -30,13 +30,15 @@
 
 .choose-genre {
   position: absolute;
-  top: 15vh;
-  width: 15vw;
+  top: 16vh;
+  width: 25vw;
+  height: 15vh;
   background-color: #cccccc;
   color: black;
   border-radius: 4px;
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   z-index: 999;
   padding: 1%;
 }
@@ -47,6 +49,10 @@
   align-items: center;
   cursor: pointer;
   border-radius: 2px;
+}
+
+.sub-genre {
+  margin-left: 1vw;
 }
 
 .genres-search:hover {
@@ -143,6 +149,7 @@
   flex-direction: row;
   gap: 1%;
   height: 5vh;
+  margin-top: 2%;
 }
 
 .genre {

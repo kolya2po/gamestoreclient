@@ -17,33 +17,6 @@
     <div class="description">
       <p>{{game?.description}}</p>
     </div>
-    <div class="comments">
-      <div class="comment" *ngFor="let c of game?.comments">
-        <div class="user">
-          <span class="material-symbols-outlined">person </span>
-          <p>{{c.author}}</p>
-        </div>
-        <div class="text">
-          <p>{{c.text}}</p>
-        </div>
-        <div class="reply-button">
-          <a href="">Reply</a>
-        </div>
-        <div *ngIf="c.replies!.length !== 0" class="replies">
-          <div class="comment" style="margin-left: 2%;" *ngFor="let r of c.replies">
-            <div class="user">
-              <span class="material-symbols-outlined">person </span>
-              <p>{{r.author}}</p>
-            </div>
-            <div class="text">
-              <p>{{r.text}}</p>
-            </div>
-            <div class="reply">
-              <a href="">Reply</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <app-game-comments [game]="game!"></app-game-comments>
   </div>
 </div>

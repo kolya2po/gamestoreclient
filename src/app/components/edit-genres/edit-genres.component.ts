@@ -19,7 +19,18 @@ export class EditGenresComponent implements OnInit {
   constructor(private gs: GenresService) { }
 
   ngOnInit(): void {
-    this.gs.getAll().subscribe(data => this.genres = data);
+    this.gs.getAll().subscribe(data => {
+      console.log(data);
+      for (let parentGenre of data) {
+        if (parentGenre.subGenres?.length === 0) {
+          this.genres.push(parentGenre);
+          continue;
+        }
+        for (let subGenre of parentGenre.subGenres!) {
+          this.genres.push(subGenre);
+        }
+      }
+    });
   }
 
   addGenre() {

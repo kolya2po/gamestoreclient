@@ -14,7 +14,7 @@ import {UsersService} from "../../services/users.service";
 export class HomepageComponent implements OnInit {
   games: Game[] = [];
   genres: Genre[] = [];
-  genresToFind: string[] = [];
+  genresToFind: Genre[] = [];
   tagIsPressed = false;
   search = '';
   constructor(private gs: GamesService,
@@ -33,17 +33,17 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  onChangeGenre(genre: any) {
+  onChangeGenre(genre: Genre) {
     if (!this.genresToFind.includes(genre)) {
       this.genresToFind.push(genre);
       this.genresToFind = [...this.genresToFind];
     } else {
-      this.genresToFind = this.genresToFind.filter(g => g !== genre);
+      this.genresToFind = this.genresToFind.filter(g => g.id !== genre.id);
     }
   }
 
-  showControls(auhorId: number, img: HTMLImageElement, control: HTMLDivElement) {
-    if (this.us.user.id === auhorId) {
+  showControls(authorId: number, img: HTMLImageElement, control: HTMLDivElement) {
+    if (this.us.user.id === authorId) {
       img.style.opacity = '0.2';
       control.style.opacity = '1';
     }

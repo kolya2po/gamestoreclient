@@ -23,6 +23,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MatSnackBarModule} from "@angular/material/snack-bar";
 import { AddUserAvatarComponent } from './components/add-user-avatar/add-user-avatar.component';
 import { EditUserPageComponent } from './components/edit-user-page/edit-user-page.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { GameCommentsComponent } from './components/game-comments/game-comments.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { EditUserPageComponent } from './components/edit-user-page/edit-user-pag
     LoginComponent,
     RegistrationComponent,
     AddUserAvatarComponent,
-    EditUserPageComponent
+    EditUserPageComponent,
+    AddCommentComponent,
+    GameCommentsComponent
   ],
     imports: [
         BrowserModule,
