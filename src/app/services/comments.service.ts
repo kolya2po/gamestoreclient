@@ -13,4 +13,8 @@ export class CommentsService {
   public create(comment: CreateComment) {
     return this.http.post<Comment>(this.url, comment);
   }
+
+  public delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

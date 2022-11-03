@@ -18,7 +18,7 @@
       <p (click)="c.isReplying = !c.isReplying;">Reply</p>
       <div class="mode">
         <p>Edit</p>
-        <p>Delete</p>
+        <p (click)="deleteComment(c)">Delete</p>
       </div>
     </div>
     <app-add-comment *ngIf="c.isReplying" [game]="game" (isAdded)="c.isReplying = $event"
@@ -39,7 +39,7 @@
           <p (click)="r.isReplying = !r.isReplying;">Reply</p>
           <div class="mode">
             <p>Edit</p>
-            <p>Delete</p>
+            <p (click)="deleteComment(r)">Delete</p>
           </div>
         </div>
         <app-add-comment *ngIf="r.isReplying" [game]="game" (isAdded)="r.isReplying = $event"

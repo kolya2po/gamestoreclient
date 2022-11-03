@@ -13,9 +13,7 @@ export class GamePageComponent implements OnInit {
   constructor(private gs: GamesService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // @ts-ignore
-    let id = +this.router.snapshot.paramMap.get('id');
-    console.log(id);
+    let id = +this.router.snapshot.paramMap.get('id')!;
     this.gs.getById(id).subscribe(data => this.game = data);
   }
 }
