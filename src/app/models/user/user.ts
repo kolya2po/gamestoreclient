@@ -3,7 +3,8 @@ export class User {
     public id?: number,
     public avatarImagePath?: string,
     public firstName?: string,
-    public lastName?: string
+    public lastName?: string,
+    public userName?: string,
   ) {
   }
 }

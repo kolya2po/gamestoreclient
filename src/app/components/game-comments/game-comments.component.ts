@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Game} from "../../models/game/game";
-import {Comment} from "../../models/comment/comment";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: 'app-game-comments',
@@ -9,18 +9,9 @@ import {Comment} from "../../models/comment/comment";
 })
 export class GameCommentsComponent implements OnInit {
   @Input() game: Game = new Game();
-  constructor() { }
+  isAdding: boolean = false;
+  constructor(public us: UsersService) { }
 
   ngOnInit(): void {
-  }
-
-  addComment(comment: Comment) {
-    let parent = this.game.comments?.find(c => c.parentCommentId === comment.parentCommentId);
-    if (parent !== undefined) {
-      parent.replies!.push(comment);
-      return;
-    }
-
-    this.game?.comments?.push(comment);
   }
 }

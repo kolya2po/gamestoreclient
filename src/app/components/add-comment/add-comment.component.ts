@@ -3,6 +3,7 @@ import {CreateComment} from "../../models/comment/create-comment";
 import {CommentsService} from "../../services/comments.service";
 import {UsersService} from "../../services/users.service";
 import {Comment} from "../../models/comment/comment";
+import {Game} from "../../models/game/game";
 
 @Component({
   selector: 'app-add-comment',
@@ -10,10 +11,10 @@ import {Comment} from "../../models/comment/comment";
   styleUrls: ['./add-comment.component.css']
 })
 export class AddCommentComponent implements OnInit {
-  @Input() gameId: number = 0;
-  @Output() newComment = new EventEmitter<Comment>();
+  @Input() game: Game = new Game();
+  @Input() parentCommentId: number = 0;
+  @Output() isAdded = new EventEmitter<boolean>();
 
-  isAdding = false;
   comment: CreateComment = new CreateComment();
   constructor(private cs: CommentsService,
               private us: UsersService) { }
@@ -21,22 +22,37 @@ export class AddCommentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  create(parentId?: number) {
+  create() {
     if (this.inputIsValid()) {
       this.comment.authorId = this.us.user.id;
-      this.comment.gameId = this.gameId;
-      this.comment.parentCommentId = parentId;
+      this.comment.gameId = this.game.id;
+      if (this.parentCommentId !== 0) {
+        this.comment.parentCommentId = this.parentCommentId;
+      }
       this.cs.create(this.comment)
         .subscribe((c) => {
-        this.newComment.emit(c);
-        this.comment.text = "";
-      });
+          this.addToGame(c);
+          this.isAdded.emit(false);
+          this.parentCommentId = 0;
+        });
     }
   }
 
+  addToGame(comment: Comment) {
+     comment.author = this.us.user.userName;
+     if (this.parentCommentId !== 0) {
+       let parent = this.game.comments?.find(c => c.id === this.parentCommentId);
+       parent!.replies!.push(comment);
+       return;
+     }
+
+     this.game.comments?.push(comment);
+  }
+
   cancel() {
-    this.isAdding = false;
+    this.isAdded.emit(false)
     this.comment.text = "";
+    this.parentCommentId = 0;
   }
 
   inputIsValid() {

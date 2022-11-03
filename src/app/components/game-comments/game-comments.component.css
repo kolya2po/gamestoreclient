@@ -1,4 +1,23 @@
 /* Comments */
+.add-comment {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 500;
+}
+
+.add-comment p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #34b934;
+  height: 4vh;
+  width: 5vw;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .comments {
   display: flex;
   flex-direction: column;
@@ -15,16 +34,29 @@
   margin: 0;
 }
 
-.user {
+.user, .left {
   display: flex;
   flex-direction: row;
   align-items: center;
   font-weight: bold;
-  gap: 1%;
+}
+
+.user {
+  gap: 1vw;
 }
 
 .text {
   text-align: justify;
+}
+
+.reply, .mode {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mode {
+  width: 5vw;
 }
 
 .reply p{

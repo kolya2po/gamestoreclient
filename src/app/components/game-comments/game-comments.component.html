@@ -1,30 +1,49 @@
-<app-add-comment [gameId]="game?.id!" (newComment)="addComment($event)"></app-add-comment>
+<div class="add-comment" *ngIf="us.user.id !== undefined">
+  <p (click)="isAdding = !isAdding">Comment</p>
+</div>
+<app-add-comment *ngIf="isAdding" [game]="game" (isAdded)="isAdding = $event"></app-add-comment>
 <div class="comments">
   <div class="comment" *ngFor="let c of game?.comments">
     <div class="user">
-      <span class="material-symbols-outlined">person </span>
-      <p>{{c.author}}</p>
+      <div class="left">
+        <span class="material-symbols-outlined">person </span>
+        <p>{{c.author}}</p>
+      </div>
+      <p>{{c.creationDate | date:'short'}}</p>
     </div>
     <div class="text">
       <p>{{c.text}}</p>
     </div>
     <div class="reply">
-      <p (click)="c.isReplying = true;">Reply</p>
+      <p (click)="c.isReplying = !c.isReplying;">Reply</p>
+      <div class="mode">
+        <p>Edit</p>
+        <p>Delete</p>
+      </div>
     </div>
-    <app-add-comment *ngIf="c.isReplying" [gameId]="game?.id!" (newComment)="addComment($event)"></app-add-comment>
+    <app-add-comment *ngIf="c.isReplying" [game]="game" (isAdded)="c.isReplying = $event"
+                     [parentCommentId]="c.id!"></app-add-comment>
     <div *ngIf="c.replies!.length !== 0" class="replies">
       <div class="comment" style="margin-left: 2%;" *ngFor="let r of c.replies">
         <div class="user">
-          <span class="material-symbols-outlined">person </span>
-          <p>{{r.author}}</p>
+          <div class="left">
+            <span class="material-symbols-outlined">person </span>
+            <p>{{r.author}}</p>
+          </div>
+          <p>{{r.creationDate | date:'short'}}</p>
         </div>
         <div class="text">
           <p>{{r.text}}</p>
         </div>
         <div class="reply">
-          <p>Reply</p>
+          <p (click)="r.isReplying = !r.isReplying;">Reply</p>
+          <div class="mode">
+            <p>Edit</p>
+            <p>Delete</p>
+          </div>
         </div>
-        <app-add-comment *ngIf="r.isReplying" [gameId]="game?.id!" (newComment)="addComment($event)"></app-add-comment>
+        <app-add-comment *ngIf="r.isReplying" [game]="game" (isAdded)="r.isReplying = $event"
+                         [parentCommentId]="r.id!"></app-add-comment>
       </div>
     </div>
   </div>

@@ -3,25 +3,6 @@
   flex-direction: column;
 }
 
-.add-comment {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  font-weight: 500;
-}
-
-.add-comment p {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: #34b934;
-  height: 4vh;
-  width: 5vw;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 .input {
   display: flex;
   flex-direction: column;
@@ -62,6 +43,7 @@
   background-color: #34b934;
   border-radius: 4px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .cancel p {
