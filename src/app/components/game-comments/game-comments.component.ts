@@ -21,21 +21,19 @@ export class GameCommentsComponent implements OnInit, OnDestroy {
     for (let comment of this.commentsToDel) {
       this.cs.delete(comment.id!).subscribe();
     }
+
   }
 
   ngOnInit(): void {
-
+    window.onbeforeunload = () => this.ngOnDestroy();
   }
 
   changeItemsToDel(comment: Comment) {
     if (this.commentsToDel.includes(comment)) {
       this.commentsToDel = this.commentsToDel.filter(c => c.id !== comment.id);
-      console.log(this.commentsToDel);
       return;
     }
 
     this.commentsToDel.push(comment);
-
-    console.log(this.commentsToDel);
   }
 }

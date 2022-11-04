@@ -4,5 +4,6 @@
 <app-add-comment *ngIf="isAdding" [game]="game" (isAdded)="isAdding = $event"></app-add-comment>
 <div class="comments">
     <app-comment *ngFor="let c of game?.comments" [comment]="c" [game]="game"
-    (commentToDel)="changeItemsToDel($event)"></app-comment>
+    (commentToDel)="changeItemsToDel($event)">
+    </app-comment>
 </div>
