@@ -17,17 +17,21 @@ export class CommentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  deleteComment() {
-    this.cs.delete(this.comment.id!)
+  prepareDeleting() {
+
+  }
+
+  deleteComment(comment: Comment) {
+    this.cs.delete(comment.id!)
       .subscribe(() => {
-        if (this.comment.parentCommentId === null) {
+        if (comment.parentCommentId === null) {
           this.game.comments = this.game.comments
-            ?.filter(c => c.id !== this.comment.id);
+            ?.filter(c => c.id !== comment.id);
           return;
         }
 
-        let parent = this.game.comments?.find(c => c.id === this.comment.parentCommentId);
-        parent!.replies = parent!.replies?.filter(r => r.id !== this.comment.id);
+        let parent = this.game.comments?.find(c => c.id === comment.parentCommentId);
+        parent!.replies = parent!.replies?.filter(r => r.id !== comment.id);
       });
   }
 }

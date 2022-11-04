@@ -8,6 +8,7 @@ export class Comment {
     public gameId?: number,
     public replies?: Comment[],
     public isReplying?: boolean,
-    public isEditing?: boolean
+    public isEditing?: boolean,
+    public isDeleting?: boolean
   ) { }
 }

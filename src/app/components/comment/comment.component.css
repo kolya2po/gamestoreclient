@@ -23,11 +23,22 @@
   text-align: justify;
 }
 
+.save-delete {
+  border-radius: 4px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 3vw;
+  background-color: red;
+  cursor: pointer;
+}
+
 .date {
   font-weight: normal;
 }
 
-.reply, .mode {
+.reply {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -40,7 +51,9 @@
 }
 
 .mode {
-  width: 7vw;
+  display: flex;
+  flex-direction: row;
+  width: 9vw;
   gap: 1vw;
 }
 
@@ -50,4 +63,10 @@
   align-items: center;
   cursor: pointer;
   font-size: 16px;
+}
+
+.edit:hover, .delete:hover {
+  border-radius: 4px;
+  background-color: white;
+  color: black;
 }

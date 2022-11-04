@@ -7,7 +7,8 @@
     <p class="date">{{comment.creationDate | date:'short'}}</p>
   </div>
   <div class="text">
-    <p>{{comment.text}}</p>
+    <p *ngIf="!comment.isDeleting">{{comment.text}}</p>
+    <p *ngIf="comment.isDeleting" class="save-delete" (click)="deleteComment(comment)">Save</p>
   </div>
   <div class="reply">
     <p class="rep" (click)="comment.isReplying = !comment.isReplying;">Reply</p>
@@ -16,7 +17,7 @@
         <span class="material-symbols-outlined">edit</span>
         <p>Edit</p>
       </div>
-      <div class="delete" (click)="deleteComment()">
+      <div class="delete"  (click)="comment.isDeleting = !comment.isDeleting">
         <span class="material-symbols-outlined">delete</span>
         <p class="delete">Delete</p>
       </div>
@@ -44,9 +45,12 @@
         <span class="material-symbols-outlined">edit</span>
         <p>Edit</p>
       </div>
-      <div class="delete" (click)="deleteComment()">
+      <div class="delete" (click)="r.isDeleting = !r.isDeleting">
         <span class="material-symbols-outlined">delete</span>
         <p class="delete">Delete</p>
+      </div>
+      <div *ngIf="r.isDeleting" class="save-delete" (click)="deleteComment(r)">
+        <p>Save</p>
       </div>
     </div>
   </div>
