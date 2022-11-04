@@ -1,0 +1,53 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.user, .left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+}
+
+.user {
+  gap: 1vw;
+}
+
+.text {
+  text-align: justify;
+}
+
+.date {
+  font-weight: normal;
+}
+
+.reply, .mode {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rep {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.mode {
+  width: 7vw;
+  gap: 1vw;
+}
+
+.edit, .delete {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
