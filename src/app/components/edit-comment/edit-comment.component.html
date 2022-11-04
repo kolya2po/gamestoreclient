@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="adding-comment">
+    <form>
+      <div class="input">
+        <textarea id="text" name="text" class="center"
+                  required
+                  minlength="1"
+                  maxlength="600"
+                  [(ngModel)]="comment.text"
+                  #text="ngModel"></textarea>
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="text.touched && text.invalid">Text is required.</p>
+      </div>
+      <div class="buttons">
+        <div class="save" (click)="update()">
+          <p>Save</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

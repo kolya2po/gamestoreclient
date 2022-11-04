@@ -6,6 +6,7 @@ export class Comment {
     public parentCommentId?: number,
     public author?: string,
     public replies?: Comment[],
-    public isReplying?: boolean
+    public isReplying?: boolean,
+    public isEditing?: boolean
   ) { }
 }

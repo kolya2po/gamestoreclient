@@ -22,6 +22,8 @@ export class AddImageComponent implements OnInit {
 
   addImage() {
     this.gs.addImage(<number>this.game!.id, this.image!)
-      .subscribe();
+      .subscribe((imageDto) => {
+        this.game.imagePath = imageDto.path;
+      });
   }
 }

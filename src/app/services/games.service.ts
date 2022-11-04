@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Game} from "../models/game/game";
 import {CreateGame} from "../models/game/create-game";
+import {ImagePathDto} from "../models/imagePathDto";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,6 @@ export class GamesService {
   public addImage(id: number, image: File) {
     const formData = new FormData();
     formData.append('image', image);
-    return this.http.post<string>(`${this.url}/${id}/image`, formData);
+    return this.http.post<ImagePathDto>(`${this.url}/${id}/image`, formData);
   }
 }

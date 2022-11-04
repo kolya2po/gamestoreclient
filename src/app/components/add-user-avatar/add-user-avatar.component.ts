@@ -20,10 +20,8 @@ export class AddUserAvatarComponent implements OnInit {
 
   addImage() {
     this.us.addAvatar(this.image!)
-      .subscribe((path) => {
-        this.us.user.avatarImagePath = path;
-        console.log(path);
+      .subscribe((imageDto) => {
+        this.us.user.avatarImagePath = imageDto.path;
       });
-    console.log(this.us.user);
   }
 }

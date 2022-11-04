@@ -6,23 +6,30 @@
   <div class="comment" *ngFor="let c of game?.comments">
     <div class="user">
       <div class="left">
-        <span class="material-symbols-outlined">person </span>
+        <span class="material-symbols-outlined">person</span>
         <p>{{c.author}}</p>
       </div>
-      <p>{{c.creationDate | date:'short'}}</p>
+      <p class="date">{{c.creationDate | date:'short'}}</p>
     </div>
     <div class="text">
       <p>{{c.text}}</p>
     </div>
     <div class="reply">
-      <p (click)="c.isReplying = !c.isReplying;">Reply</p>
+      <p class="rep" (click)="c.isReplying = !c.isReplying;">Reply</p>
       <div class="mode">
-        <p>Edit</p>
-        <p (click)="deleteComment(c)">Delete</p>
+        <div class="edit" (click)="c.isEditing = !c.isEditing;">
+          <span class="material-symbols-outlined">edit</span>
+          <p>Edit</p>
+        </div>
+        <div class="delete" (click)="deleteComment(c)">
+          <span class="material-symbols-outlined">delete</span>
+          <p class="delete">Delete</p>
+        </div>
       </div>
     </div>
     <app-add-comment *ngIf="c.isReplying" [game]="game" (isAdded)="c.isReplying = $event"
                      [parentCommentId]="c.id!"></app-add-comment>
+    <app-edit-comment *ngIf="c.isEditing" [game]="game" [comment]="c" (isEdited)="c.isEditing = $event"></app-edit-comment>
     <div *ngIf="c.replies!.length !== 0" class="replies">
       <div class="comment" style="margin-left: 2%;" *ngFor="let r of c.replies">
         <div class="user">

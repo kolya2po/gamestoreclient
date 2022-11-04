@@ -9,6 +9,7 @@ import {RouterExtensionService} from "./router-extension.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError, tap} from "rxjs";
+import {ImagePathDto} from "../models/imagePathDto";
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class UsersService {
   public addAvatar(image: File) {
     const formData = new FormData();
     formData.append('avatar', image);
-    return this.http.post<string>(`${this.url}/${this.user.id}/avatar`, formData);
+    return this.http.post<ImagePathDto>(`${this.url}/${this.user.id}/avatar`, formData);
   }
 
   public register(model: RegistrationModel) {
@@ -51,6 +52,7 @@ export class UsersService {
       .subscribe(dto => {
         this.saveToCookies(dto);
         this.handleReturnedDto(dto);
+        this.router.navigate(['']);
       });
   }
 
@@ -67,6 +69,7 @@ export class UsersService {
           this.saveToCookies(dto);
         }
         this.handleReturnedDto(dto);
+        this.routeExt.navigateToPrev();
       });
   }
 
@@ -93,8 +96,6 @@ export class UsersService {
       .subscribe(u => {
         this.user = u;
       });
-
-    this.routeExt.navigateToPrev();
   }
 
   saveToCookies(dto: UserDto) {

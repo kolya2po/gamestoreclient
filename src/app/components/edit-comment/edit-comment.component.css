@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.input textarea {
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  height: 100px;
+  font-size: 15px;
+}
+
+.center {
+  resize: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: block;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 1vh;
+  gap: 2%;
+}
+
+.save p, .cancel p {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 4vh;
+  width: 6vw;
+  background-color: #34b934;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancel p {
+  background-color: red;
+}

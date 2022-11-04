@@ -25,6 +25,7 @@ import { AddUserAvatarComponent } from './components/add-user-avatar/add-user-av
 import { EditUserPageComponent } from './components/edit-user-page/edit-user-page.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
 import { GameCommentsComponent } from './components/game-comments/game-comments.component';
+import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { GameCommentsComponent } from './components/game-comments/game-comments.
     AddUserAvatarComponent,
     EditUserPageComponent,
     AddCommentComponent,
-    GameCommentsComponent
+    GameCommentsComponent,
+    EditCommentComponent
   ],
     imports: [
         BrowserModule,
