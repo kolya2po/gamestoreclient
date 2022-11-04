@@ -5,6 +5,7 @@ export class Comment {
     public creationDate?: string,
     public parentCommentId?: number,
     public author?: string,
+    public gameId?: number,
     public replies?: Comment[],
     public isReplying?: boolean,
     public isEditing?: boolean

@@ -3,55 +3,5 @@
 </div>
 <app-add-comment *ngIf="isAdding" [game]="game" (isAdded)="isAdding = $event"></app-add-comment>
 <div class="comments">
-  <div class="comment" *ngFor="let c of game?.comments">
-    <div class="user">
-      <div class="left">
-        <span class="material-symbols-outlined">person</span>
-        <p>{{c.author}}</p>
-      </div>
-      <p class="date">{{c.creationDate | date:'short'}}</p>
-    </div>
-    <div class="text">
-      <p>{{c.text}}</p>
-    </div>
-    <div class="reply">
-      <p class="rep" (click)="c.isReplying = !c.isReplying;">Reply</p>
-      <div class="mode">
-        <div class="edit" (click)="c.isEditing = !c.isEditing;">
-          <span class="material-symbols-outlined">edit</span>
-          <p>Edit</p>
-        </div>
-        <div class="delete" (click)="deleteComment(c)">
-          <span class="material-symbols-outlined">delete</span>
-          <p class="delete">Delete</p>
-        </div>
-      </div>
-    </div>
-    <app-add-comment *ngIf="c.isReplying" [game]="game" (isAdded)="c.isReplying = $event"
-                     [parentCommentId]="c.id!"></app-add-comment>
-    <app-edit-comment *ngIf="c.isEditing" [game]="game" [comment]="c" (isEdited)="c.isEditing = $event"></app-edit-comment>
-    <div *ngIf="c.replies!.length !== 0" class="replies">
-      <div class="comment" style="margin-left: 2%;" *ngFor="let r of c.replies">
-        <div class="user">
-          <div class="left">
-            <span class="material-symbols-outlined">person </span>
-            <p>{{r.author}}</p>
-          </div>
-          <p>{{r.creationDate | date:'short'}}</p>
-        </div>
-        <div class="text">
-          <p>{{r.text}}</p>
-        </div>
-        <div class="reply">
-          <p (click)="r.isReplying = !r.isReplying;">Reply</p>
-          <div class="mode">
-            <p>Edit</p>
-            <p (click)="deleteComment(r)">Delete</p>
-          </div>
-        </div>
-        <app-add-comment *ngIf="r.isReplying" [game]="game" (isAdded)="r.isReplying = $event"
-                         [parentCommentId]="r.id!"></app-add-comment>
-      </div>
-    </div>
-  </div>
+    <app-comment *ngFor="let c of game.comments" [comment]="c" [game]="game"></app-comment>
 </div>

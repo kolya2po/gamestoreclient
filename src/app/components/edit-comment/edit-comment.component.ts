@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comment} from "../../models/comment/comment";
 import {CommentsService} from "../../services/comments.service";
 import {UpdateComment} from "../../models/comment/update-comment";
-import {Game} from "../../models/game/game";
 import {UsersService} from "../../services/users.service";
 
 @Component({
@@ -12,7 +11,6 @@ import {UsersService} from "../../services/users.service";
 })
 export class EditCommentComponent implements OnInit {
   @Input() comment: Comment = new Comment();
-  @Input() game: Game = new Game();
   @Output() isEdited = new EventEmitter<boolean>();
 
   constructor(private cs: CommentsService, private us: UsersService) { }
@@ -37,7 +35,7 @@ export class EditCommentComponent implements OnInit {
     updateDto.id = this.comment.id;
     updateDto.text = this.comment.text;
     updateDto.parentCommentId = this.comment.parentCommentId;
-    updateDto.gameId = this.game.id;
+    updateDto.gameId = this.comment.gameId;
     updateDto.authorId = this.us.user.id;
     return updateDto;
   }

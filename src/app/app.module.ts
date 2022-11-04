@@ -26,6 +26,7 @@ import { EditUserPageComponent } from './components/edit-user-page/edit-user-pag
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
 import { GameCommentsComponent } from './components/game-comments/game-comments.component';
 import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { EditCommentComponent } from './components/edit-comment/edit-comment.com
     EditUserPageComponent,
     AddCommentComponent,
     GameCommentsComponent,
-    EditCommentComponent
+    EditCommentComponent,
+    CommentComponent
   ],
     imports: [
         BrowserModule,
