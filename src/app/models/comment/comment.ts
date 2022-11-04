@@ -9,6 +9,7 @@ export class Comment {
     public replies?: Comment[],
     public isReplying?: boolean,
     public isEditing?: boolean,
-    public isDeleting?: boolean
+    public isDeleting?: boolean,
+    public isVisible?: boolean
   ) { }
 }

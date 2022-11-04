@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comment} from "../../models/comment/comment";
-import {CommentsService} from "../../services/comments.service";
 import {Game} from "../../models/game/game";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: 'app-comment',
@@ -11,27 +11,21 @@ import {Game} from "../../models/game/game";
 export class CommentComponent implements OnInit {
   @Input() game: Game = new Game();
   @Input() comment: Comment = new Comment();
+  @Output() commentToDel = new EventEmitter<Comment>();
 
-  constructor(private cs: CommentsService) { }
+  constructor(public us: UsersService) { }
 
   ngOnInit(): void {
   }
 
-  prepareDeleting() {
-
+  hideComment(comment: Comment) {
+    comment.isVisible = true;
+    this.commentToDel.emit(comment);
   }
 
-  deleteComment(comment: Comment) {
-    this.cs.delete(comment.id!)
-      .subscribe(() => {
-        if (comment.parentCommentId === null) {
-          this.game.comments = this.game.comments
-            ?.filter(c => c.id !== comment.id);
-          return;
-        }
-
-        let parent = this.game.comments?.find(c => c.id === comment.parentCommentId);
-        parent!.replies = parent!.replies?.filter(r => r.id !== comment.id);
-      });
+  restore(comment: Comment) {
+    comment.isDeleting = false;
+    comment.isVisible = false;
+    this.commentToDel.emit(comment);
   }
 }

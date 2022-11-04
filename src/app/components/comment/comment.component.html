@@ -1,60 +1,68 @@
 <div class="comment">
-  <div class="user">
-    <div class="left">
-      <span class="material-symbols-outlined">person</span>
-      <p>{{comment.author}}</p>
-    </div>
-    <p class="date">{{comment.creationDate | date:'short'}}</p>
-  </div>
-  <div class="text">
-    <p *ngIf="!comment.isDeleting">{{comment.text}}</p>
-    <p *ngIf="comment.isDeleting" class="save-delete" (click)="deleteComment(comment)">Save</p>
-  </div>
-  <div class="reply">
-    <p class="rep" (click)="comment.isReplying = !comment.isReplying;">Reply</p>
-    <div class="mode">
-      <div class="edit" (click)="comment.isEditing = !comment.isEditing;">
-        <span class="material-symbols-outlined">edit</span>
-        <p>Edit</p>
+  <div class="content" *ngIf="!comment.isVisible">
+    <div class="user">
+      <div class="left">
+        <span class="material-symbols-outlined">person</span>
+        <p>{{comment.author}}</p>
       </div>
-      <div class="delete"  (click)="comment.isDeleting = !comment.isDeleting">
-        <span class="material-symbols-outlined">delete</span>
-        <p class="delete">Delete</p>
+      <p class="date">{{comment.creationDate | date:'short'}}</p>
+    </div>
+    <div class="text">
+      <p *ngIf="!comment.isDeleting">{{comment.text}}</p>
+      <p *ngIf="comment.isDeleting" class="save-delete" (click)="hideComment(comment)">Save</p>
+    </div>
+    <div class="reply">
+      <p class="rep" (click)="comment.isReplying = !comment.isReplying;">Reply</p>
+      <div class="mode" *ngIf="us.user.id !== undefined">
+        <div class="edit" (click)="comment.isEditing = !comment.isEditing;">
+          <span class="material-symbols-outlined">edit</span>
+          <p>Edit</p>
+        </div>
+        <div class="delete" (click)="comment.isDeleting = !comment.isDeleting">
+          <span class="material-symbols-outlined">delete</span>
+          <p class="delete">Delete</p>
+        </div>
       </div>
     </div>
+    <app-add-comment *ngIf="comment.isReplying" [game]="game" (isAdded)="comment.isReplying = $event"
+                     [parentCommentId]="comment.id!"></app-add-comment>
+    <app-edit-comment *ngIf="comment.isEditing" [comment]="comment" (isEdited)="comment.isEditing = $event"></app-edit-comment>
   </div>
-  <app-add-comment *ngIf="comment.isReplying" [game]="game" (isAdded)="comment.isReplying = $event"
-                   [parentCommentId]="comment.id!"></app-add-comment>
-  <app-edit-comment *ngIf="comment.isEditing" [comment]="comment" (isEdited)="comment.isEditing = $event"></app-edit-comment>
+  <div class="restore" *ngIf="comment.isVisible" (click)="restore(comment)">
+    <p>Restore</p>
+  </div>
 </div>
 <div style="margin-left: 2%;" class="comment" *ngFor="let r of comment.replies">
-  <div class="user">
-    <div class="left">
-      <span class="material-symbols-outlined">person</span>
-      <p>{{r.author}}</p>
+  <div class="content" *ngIf="!r.isVisible">
+    <div class="user">
+      <div class="left">
+        <span class="material-symbols-outlined">person</span>
+        <p>{{r.author}}</p>
+      </div>
+      <p class="date">{{r.creationDate | date:'short'}}</p>
     </div>
-    <p class="date">{{r.creationDate | date:'short'}}</p>
-  </div>
-  <div class="text">
-    <p>{{r.text}}</p>
-  </div>
-  <div class="reply">
-    <p class="rep" (click)="r.isReplying = !r.isReplying;">Reply</p>
-    <div class="mode">
-      <div class="edit" (click)="r.isEditing = !r.isEditing;">
-        <span class="material-symbols-outlined">edit</span>
-        <p>Edit</p>
-      </div>
-      <div class="delete" (click)="r.isDeleting = !r.isDeleting">
-        <span class="material-symbols-outlined">delete</span>
-        <p class="delete">Delete</p>
-      </div>
-      <div *ngIf="r.isDeleting" class="save-delete" (click)="deleteComment(r)">
-        <p>Save</p>
+    <div class="text">
+      <p *ngIf="!r.isDeleting">{{r.text}}</p>
+      <p *ngIf="r.isDeleting" class="save-delete" (click)="hideComment(r)">Save</p>
+    </div>
+    <div class="reply">
+      <p class="rep" (click)="r.isReplying = !r.isReplying;">Reply</p>
+      <div class="mode">
+        <div class="edit" (click)="r.isEditing = !r.isEditing;">
+          <span class="material-symbols-outlined">edit</span>
+          <p>Edit</p>
+        </div>
+        <div class="delete" (click)="r.isDeleting = !r.isDeleting">
+          <span class="material-symbols-outlined">delete</span>
+          <p class="delete">Delete</p>
+        </div>
       </div>
     </div>
+    <app-add-comment *ngIf="r.isReplying" [game]="game" (isAdded)="r.isReplying = $event"
+                     [parentCommentId]="r.id!"></app-add-comment>
+    <app-edit-comment *ngIf="r.isEditing" [comment]="r" (isEdited)="r.isEditing = $event"></app-edit-comment>
   </div>
-  <app-add-comment *ngIf="r.isReplying" [game]="game" (isAdded)="r.isReplying = $event"
-                   [parentCommentId]="r.id!"></app-add-comment>
-  <app-edit-comment *ngIf="r.isEditing" [comment]="r" (isEdited)="r.isEditing = $event"></app-edit-comment>
+  <div class="restore" *ngIf="r.isVisible" (click)="restore(r)">
+    <p>Restore</p>
+  </div>
 </div>
