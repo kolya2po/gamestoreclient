@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Cart} from "../models/cart/cart";
+import {CartItem} from "../models/cart/cart-item";
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,20 @@ export class CartService {
   }
 
   public addGame(gameId: number) {
-    return this.http.post(`this.url/game/${gameId}`, {});
+    return this.http.post<CartItem>(`${this.url}/game/${gameId}`, {})
+      .subscribe((ci) => {
+        if (!this.cart.cartItems?.includes(ci)) {
+          this.cart.cartItems?.push(ci);
+          this.cart.totalItems!++;
+        }
+      });
   }
 
   public removeGame(gameId: number) {
-    return this.http.delete(`this.url/item/${gameId}`);
+    return this.http.delete(`${this.url}/item/${gameId}`)
+      .subscribe(() => {
+        this.cart.cartItems = this.cart.cartItems?.filter(ci => ci.gameId !== gameId);
+        this.cart.totalItems!--;
+      });
   }
 }

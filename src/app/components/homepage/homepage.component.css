@@ -163,6 +163,7 @@
 .name {
   font-family: 'Roboto 300', sans-serif;
   font-size: 25px;
+  cursor: pointer;
 }
 
 .changes {

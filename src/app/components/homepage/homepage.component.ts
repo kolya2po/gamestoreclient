@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Genre} from "../../models/genre/genre";
 import {GenresService} from "../../services/genres.service";
 import {UsersService} from "../../services/users.service";
+import {CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-homepage',
@@ -17,10 +18,12 @@ export class HomepageComponent implements OnInit {
   genresToFind: Genre[] = [];
   tagIsPressed = false;
   search = '';
+
   constructor(private gs: GamesService,
               public router: Router,
               private genresService: GenresService,
-              public us: UsersService) { }
+              public us: UsersService,
+              public cs: CartService) { }
 
   ngOnInit(): void {
     this.gs.getAll().subscribe((data: Game[]) => this.games = data);

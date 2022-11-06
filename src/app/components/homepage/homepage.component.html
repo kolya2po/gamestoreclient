@@ -29,10 +29,10 @@
              (mouseover)="showControls(g.authorId!, img, changes)"
              (mouseleave)="img.style.opacity = '1'; changes.style.opacity = '0'">
       <img [src]="g.imagePath" [alt]="g.name" #img>
-      <div class="info" (click)="router.navigate(['game', g.id])">
+      <div class="info">
         <div class="price">
           <p>${{g.price}}</p>
-          <div class="buy">
+          <div class="buy" (click)="cs.addGame(g.id!)">
             <p>BUY</p>
           </div>
         </div>
@@ -41,7 +41,7 @@
             <p>{{ge}}</p>
           </div>
         </div>
-        <div class="name">
+        <div class="name" (click)="router.navigate(['game', g.id])">
           <p>{{g.name}}</p>
         </div>
       </div>
