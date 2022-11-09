@@ -7,6 +7,7 @@ import {EditGamePageComponent} from "../components/edit-game-page/edit-game-page
 import {RegistrationComponent} from "../components/registration/registration.component";
 import {LoginComponent} from "../components/login/login.component";
 import {EditUserPageComponent} from "../components/edit-user-page/edit-user-page.component";
+import {CartPageComponent} from "../components/cart-page/cart-page.component";
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LoginComponent},
   { path: 'edit-user', component: EditUserPageComponent},
+  { path: 'cart', component: CartPageComponent},
 ];
 
 @NgModule({

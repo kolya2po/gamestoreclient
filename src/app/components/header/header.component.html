@@ -15,7 +15,7 @@
       <p>{{us.user!.firstName}}</p>
       <p>{{us.user!.lastName}}</p>
     </div>
-    <div class="cart">
+    <div class="cart" (click)="router.navigate(['cart'])">
       <span class="material-symbols-outlined">shopping_cart</span>
       <p>{{cs.cart.totalItems}}</p>
     </div>

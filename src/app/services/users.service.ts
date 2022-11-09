@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError, tap} from "rxjs";
 import {ImagePathDto} from "../models/imagePathDto";
+import {CartService} from "./cart.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class UsersService {
               private cookieService: CookieService,
               private routeExt: RouterExtensionService,
               private router: Router,
-              private snackBar: MatSnackBar)
+              private snackBar: MatSnackBar,
+              private cs: CartService)
   {
     if (cookieService.get('id')) {
       let id = +cookieService.get('id');
@@ -50,8 +52,10 @@ export class UsersService {
         throw err;
       }))
       .subscribe(dto => {
+        this.clearCookiesAndStorage();
         this.saveToCookies(dto);
         this.handleReturnedDto(dto);
+        this.cs.get();
         this.router.navigate(['']);
       });
   }
@@ -65,10 +69,12 @@ export class UsersService {
         throw err;
       }))
       .subscribe((dto) => {
+        this.clearCookiesAndStorage();
         if (model.isPersistent) {
           this.saveToCookies(dto);
         }
         this.handleReturnedDto(dto);
+        this.cs.get();
         this.routeExt.navigateToPrev();
       });
   }
@@ -77,11 +83,8 @@ export class UsersService {
     return this.http.get(`${this.url}/sign-out`)
       .subscribe(() => {
         this.user = new User();
-        this.cookieService.delete('auth_token');
-        this.cookieService.delete('id');
-        if (this.cookieService.get('auth_token')) {
-          this.cookieService.deleteAll();
-        }
+        this.clearCookiesAndStorage();
+        this.cs.get();
         this.router.navigate(['/'])
       });
   }
@@ -111,5 +114,10 @@ export class UsersService {
     this.snackBar.open(message, '', {
       duration: 2000
     });
+  }
+
+  clearCookiesAndStorage() {
+    this.cookieService.deleteAll();
+    localStorage.clear();
   }
 }

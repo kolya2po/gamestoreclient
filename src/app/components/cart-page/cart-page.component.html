@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="content">
+    <div class="top">
+      <p>Your cart</p>
+      <div class="right">
+        <div class="total">
+          <p>Total: ${{cs.cart.totalPrice}}</p>
+        </div>
+        <div class="proceed">
+          <p>Proceed</p>
+        </div>
+      </div>
+    </div>
+    <div class="items">
+      <div class="item" *ngFor="let item of cs.cart.cartItems">
+        <img [src]="item.game!.imagePath" alt="">
+        <div class="info">
+          <div class="name">
+            <p>{{item.game!.name}}</p>
+          </div>
+          <div class="price">
+            <p>${{item.game!.price}}</p>
+          </div>
+        </div>
+        <div class="modify">
+          <span class="material-symbols-outlined pointer" (click)="decrease(item)">remove</span>
+          <p>{{item!.quantity}}</p>
+          <span class="material-symbols-outlined pointer" (click)="increase(item)">add</span>
+        </div>
+        <div class="total">
+          <p>Total:</p>
+          <div class="total-price">
+            <p>${{item!.quantity! * item.game!.price!}}</p>
+          </div>
+        </div>
+        <div class="remove" (click)="cs.removeGame(item.gameId!)">
+          <span class="material-symbols-outlined">close</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
