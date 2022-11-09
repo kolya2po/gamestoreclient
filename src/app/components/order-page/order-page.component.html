@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="content">
+    <div class="top">
+      <p>Completing your order</p>
+    </div>
+    <form #order="ngForm">
+      <div class="input">
+        <label>First Name</label>
+        <input type="text" id="firstName"
+               name="firstName"
+               required
+               [(ngModel)]="contactInfo.firstName"
+               #firstName="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="firstName.touched && firstName.invalid">First Name is required.</p>
+      </div>
+      <div class="input">
+        <label>Last Name</label>
+        <input type="text" id="lastName"
+               name="lastName"
+               required
+               [(ngModel)]="contactInfo.lastName"
+               #lastName="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="lastName.touched && lastName.invalid">Last Name is required.</p>
+      </div>
+      <div class="input">
+        <label>Email</label>
+        <input type="email" id="email"
+               name="email"
+               required
+               [(ngModel)]="contactInfo.email"
+               #email="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="email.touched && email.invalid">Email is required.</p>
+      </div>
+      <div class="input">
+        <label>Phone</label>
+        <input type="tel" id="phone"
+               name="phone"
+               required
+               [(ngModel)]="contactInfo.phone"
+               #phone="ngModel">
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="phone.touched && phone.invalid">Phone is required.</p>
+      </div>
+      <div class="input">
+        <label>Payment type</label>
+        <mat-select [(ngModel)]="os.order.paymentTypeId" name="paymentTypeId"
+        required
+        #paymentTypeId="ngModel">
+          <mat-option *ngFor="let pt of paymentTypes" [value]="pt.id!">
+            {{pt.name!}}
+          </mat-option>
+        </mat-select>
+        <p style="margin: 0; color: red; font-size: 14px; padding-top: 2px;"
+           *ngIf="paymentTypeId.touched && paymentTypeId.invalid">Payment type is required.</p>
+      </div>
+      <div class="input">
+        <label>Comments (optional)</label>
+        <textarea maxlength="600" class="center"
+                  id="comments" rows="1"
+                  name="comments"
+                  [(ngModel)]="os.order.comments">
+        </textarea>
+      </div>
+      <div class="send">
+        <button type="submit" [disabled]="order.invalid"
+                [style.background-color]="order.invalid ? 'red' : '#34b934'"
+                (click)="confirm()">Order</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -6,7 +6,7 @@
         <div class="total">
           <p>Total: ${{cs.cart.totalPrice}}</p>
         </div>
-        <div class="proceed">
+        <div class="proceed" (click)="router.navigate(['order'])">
           <p>Proceed</p>
         </div>
       </div>

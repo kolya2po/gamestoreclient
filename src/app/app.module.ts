@@ -28,6 +28,7 @@ import { GameCommentsComponent } from './components/game-comments/game-comments.
 import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
+import { OrderPageComponent } from './components/order-page/order-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
     GameCommentsComponent,
     EditCommentComponent,
     CommentComponent,
-    CartPageComponent
+    CartPageComponent,
+    OrderPageComponent
   ],
     imports: [
         BrowserModule,

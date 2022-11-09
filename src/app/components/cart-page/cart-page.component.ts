@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService} from "../../services/cart.service";
 import {CartItem} from "../../models/cart/cart-item";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart-page',
@@ -9,7 +10,7 @@ import {CartItem} from "../../models/cart/cart-item";
 })
 export class CartPageComponent implements OnInit, OnDestroy {
 
-  constructor(public cs: CartService) { }
+  constructor(public cs: CartService, public router: Router) { }
 
   ngOnDestroy(): void {
     this.cs.update();
