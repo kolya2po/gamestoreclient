@@ -52,10 +52,12 @@ export class UsersService {
         throw err;
       }))
       .subscribe(dto => {
-        this.clearCookiesAndStorage();
         this.saveToCookies(dto);
+        this.cookieService.delete('orderId');
         this.handleReturnedDto(dto);
-        this.cs.get();
+        this.cs.update().subscribe(() => {
+          this.cs.get();
+        });
         this.router.navigate(['']);
       });
   }
