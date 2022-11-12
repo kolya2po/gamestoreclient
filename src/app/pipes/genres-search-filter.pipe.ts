@@ -11,17 +11,24 @@ export class GenresSearchFilterPipe implements PipeTransform {
       return games;
     }
 
-    // TODO: rewrite the logic
+    let result: Game[] = []
+
     for (let genre of genres) {
       if (genre.subGenres?.length !== 0) {
         for (let sub of genre.subGenres!) {
-          console.log(sub.name);
-          games = games.filter(g => g.genres?.includes(sub.name!));
+          result = result.concat(games.filter(g => g.genres?.includes(sub.name!)))
+            .filter(this.onlyUnique);
         }
+        continue;
       }
       games = games.filter(g => g.genres?.includes(genre.name!));
+      result = games;
     }
 
-    return games;
+    return result;
+  }
+
+  onlyUnique(value: any, index: any, self: string | any[]) {
+    return self.indexOf(value) === index;
   }
 }
