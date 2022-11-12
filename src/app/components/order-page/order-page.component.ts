@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {OrdersService} from "../../services/orders.service";
 import {PaymentType} from "../../models/order/payment-type";
 import {ContactInformation} from "../../models/order/contact-information";
+import {CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-order-page',
@@ -11,7 +12,7 @@ import {ContactInformation} from "../../models/order/contact-information";
 export class OrderPageComponent implements OnInit {
   paymentTypes: PaymentType[] = [];
   contactInfo = new ContactInformation();
-  constructor(public os: OrdersService) { }
+  constructor(public os: OrdersService, private cs: CartService) { }
 
   ngOnInit(): void {
     this.os.getPaymentTypes()
@@ -19,7 +20,10 @@ export class OrderPageComponent implements OnInit {
         this.paymentTypes = pt;
       })
 
-    this.os.create();
+    this.cs.update().subscribe(() => {
+      this.os.create();
+      this.cs.get();
+    })
   }
 
   confirm() {

@@ -44,10 +44,6 @@ export class CartService {
   }
 
   public update() {
-    return this.http.put(this.url, this.cart)
-      .subscribe(() =>
-        {
-          this.get()
-        });
+    return this.http.put(this.url, this.cart);
   }
 }

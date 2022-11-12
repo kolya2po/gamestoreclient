@@ -13,7 +13,10 @@ export class CartPageComponent implements OnInit, OnDestroy {
   constructor(public cs: CartService, public router: Router) { }
 
   ngOnDestroy(): void {
-    this.cs.update();
+    this.cs.update()
+      .subscribe(() => {
+        this.cs.get();
+      });
   }
 
   ngOnInit(): void {
