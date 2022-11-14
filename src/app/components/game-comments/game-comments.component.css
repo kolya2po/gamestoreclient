@@ -18,8 +18,12 @@
   cursor: pointer;
 }
 
-.comments {
+.comments, .replies {
   display: flex;
   flex-direction: column;
   gap: 2vh;
+}
+
+.replies {
+  margin-left: 2%;
 }
