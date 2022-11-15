@@ -39,7 +39,7 @@ export class AddCommentComponent implements OnInit {
   }
 
   addToGame(comment: Comment) {
-     comment.author = this.us.user.userName;
+     comment.author = this.us.user.userName ?? 'Guest';
      if (this.parentCommentId === 0) {
        this.game.comments?.push(comment);
         return;

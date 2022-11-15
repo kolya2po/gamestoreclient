@@ -1,4 +1,4 @@
-<div class="add-comment" *ngIf="us.user.id !== undefined">
+<div class="add-comment">
   <p (click)="isAdding = !isAdding">Comment</p>
 </div>
 <app-add-comment *ngIf="isAdding" [game]="game" (isAdded)="isAdding = $event"></app-add-comment>
