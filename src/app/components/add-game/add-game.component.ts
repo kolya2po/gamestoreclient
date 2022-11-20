@@ -22,7 +22,7 @@ export class AddGameComponent {
     this.game.authorId = this.us.user.id;
     this.gs.create(this.game)
       .subscribe();
-    await this.delay(1000);
+    await this.delay(500);
 
     return this.router.navigate(['']);
   }
