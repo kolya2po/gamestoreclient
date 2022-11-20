@@ -13,7 +13,7 @@
     </div>
     <div class="reply">
       <p class="rep" *ngIf="us.user.id !== undefined" (click)="comment.isReplying = !comment.isReplying;">Reply</p>
-      <div class="mode" *ngIf="us.user.id !== undefined">
+      <div class="mode" *ngIf="us.user.id !== undefined && comment.author === us.user.userName">
         <div class="edit" (click)="comment.isEditing = !comment.isEditing;">
           <span class="material-symbols-outlined">edit</span>
           <p>Edit</p>
