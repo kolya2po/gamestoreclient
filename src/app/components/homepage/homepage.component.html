@@ -25,38 +25,7 @@
     </div>
   </div>
   <div class="cards">
-    <article class="card" *ngFor="let g of games | searchFilter: search | genresSearchFilter: genresToFind"
-             (mouseover)="showControls(g.authorId!, img, changes)"
-             (mouseleave)="img.style.opacity = '1'; changes.style.opacity = '0'">
-      <img [src]="g.imagePath" [alt]="g.name" #img>
-      <div class="info">
-        <div class="price">
-          <p>${{g.price}}</p>
-          <div class="buy" (click)="cs.addGame(g.id!)">
-            <p>BUY</p>
-          </div>
-        </div>
-        <div class="genres">
-          <div class="genre" *ngFor="let ge of g.genres">
-            <p>{{ge}}</p>
-          </div>
-        </div>
-        <div class="name" (click)="router.navigate(['game', g.id])">
-          <p>{{g.name}}</p>
-        </div>
-      </div>
-      <div class="changes" #changes>
-        <div class="edit" (click)="router.navigate(['edit', g.id])"
-                          *ngIf="us.user.id === g.authorId">
-          <span class="material-symbols-outlined">edit</span>
-          <p>Edit</p>
-        </div>
-        <div class="delete" (click)="delete(g.id)"
-             *ngIf="us.user.id === g.authorId">
-          <span class="material-symbols-outlined">delete</span>
-          <p>Delete</p>
-        </div>
-      </div>
-    </article>
+    <app-game-card *ngFor="let g of games | searchFilter: search | genresSearchFilter: genresToFind"
+    [game]="g" (deleteGameId)="filterGamesAfterDelete($event)"></app-game-card>
   </div>
 </div>

@@ -29,6 +29,8 @@ import { EditCommentComponent } from './components/edit-comment/edit-comment.com
 import { CommentComponent } from './components/comment/comment.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { OrderPageComponent } from './components/order-page/order-page.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { GameCardComponent } from './components/game-card/game-card.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { OrderPageComponent } from './components/order-page/order-page.component
     EditCommentComponent,
     CommentComponent,
     CartPageComponent,
-    OrderPageComponent
+    OrderPageComponent,
+    GameCardComponent
   ],
     imports: [
         BrowserModule,
@@ -63,13 +66,14 @@ import { OrderPageComponent } from './components/order-page/order-page.component
         MatSelectModule,
         MatSnackBarModule,
         JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('auth_token');
-            },
-            allowedDomains: ['localhost:5001']
-          }
-        })
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem('auth_token');
+                },
+                allowedDomains: ['localhost:5001']
+            }
+        }),
+        MatDialogModule
     ],
   providers: [],
   bootstrap: [AppComponent]
