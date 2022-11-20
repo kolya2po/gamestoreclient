@@ -40,8 +40,11 @@ export class HomepageComponent implements OnInit {
     if (!this.genresToFind.includes(genre)) {
       this.genresToFind.push(genre);
       this.genresToFind = [...this.genresToFind];
+
+      this.setIsSelectedForSubGenres(genre, true);
     } else {
       this.genresToFind = this.genresToFind.filter(g => g.id !== genre.id);
+      this.setIsSelectedForSubGenres(genre, false);
     }
   }
 
@@ -49,6 +52,14 @@ export class HomepageComponent implements OnInit {
     if (this.us.user.id === authorId) {
       img.style.opacity = '0.2';
       control.style.opacity = '1';
+    }
+  }
+
+  setIsSelectedForSubGenres(genre: Genre, value: boolean) {
+    if (genre.subGenres) {
+      for (let subGenre of genre.subGenres) {
+        subGenre.isSelected = value;
+      }
     }
   }
 }
