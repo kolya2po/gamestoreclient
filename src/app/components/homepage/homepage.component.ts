@@ -5,7 +5,6 @@ import {Router} from "@angular/router";
 import {Genre} from "../../models/genre/genre";
 import {GenresService} from "../../services/genres.service";
 import {UsersService} from "../../services/users.service";
-import {CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-homepage',
@@ -20,20 +19,13 @@ export class HomepageComponent implements OnInit {
   search = '';
 
   constructor(private gs: GamesService,
-              public router: Router,
               private genresService: GenresService,
               public us: UsersService,
-              public cs: CartService) { }
+              public router: Router) { }
 
   ngOnInit(): void {
     this.gs.getAll().subscribe((data: Game[]) => this.games = data);
     this.genresService.getAll().subscribe((data: Genre[]) => this.genres = data);
-  }
-
-  delete(id: number | undefined) {
-    this.gs.delete(<number>id!).subscribe(() => {
-      this.games = this.games.filter(g => g.id !== id);
-    });
   }
 
   onChangeGenre(genre: Genre) {
@@ -45,10 +37,7 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-  showControls(authorId: number, img: HTMLImageElement, control: HTMLDivElement) {
-    if (this.us.user.id === authorId) {
-      img.style.opacity = '0.2';
-      control.style.opacity = '1';
-    }
+  filterGamesAfterDelete(id: number) {
+    this.games = this.games.filter(g => g.id !== id);
   }
 }

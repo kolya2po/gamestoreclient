@@ -1,0 +1,33 @@
+<article class="card"
+         (mouseover)="showControls(game.authorId!, img, changes)"
+         (mouseleave)="img.style.opacity = '1'; changes.style.opacity = '0'">
+  <img [src]="game.imagePath" [alt]="game.name" #img>
+  <div class="info">
+    <div class="price">
+      <p>${{game.price}}</p>
+      <div class="buy" (click)="cs.addGame(game.id!)">
+        <p>BUY</p>
+      </div>
+    </div>
+    <div class="genres">
+      <div class="genre" *ngFor="let ge of game.genres">
+        <p>{{ge}}</p>
+      </div>
+    </div>
+    <div class="name" (click)="router.navigate(['game', game.id])">
+      <p>{{game.name}}</p>
+    </div>
+  </div>
+  <div class="changes" #changes>
+    <div class="edit" (click)="router.navigate(['edit', game.id])"
+         *ngIf="us.user.id === game.authorId">
+      <span class="material-symbols-outlined">edit</span>
+      <p>Edit</p>
+    </div>
+    <div class="delete" (click)="delete(game.id!)"
+         *ngIf="us.user.id === game.authorId">
+      <span class="material-symbols-outlined">delete</span>
+      <p>Delete</p>
+    </div>
+  </div>
+</article>
