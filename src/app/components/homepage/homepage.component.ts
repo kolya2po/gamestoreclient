@@ -32,12 +32,23 @@ export class HomepageComponent implements OnInit {
     if (!this.genresToFind.includes(genre)) {
       this.genresToFind.push(genre);
       this.genresToFind = [...this.genresToFind];
+
+      this.setIsSelectedForSubGenres(genre, true);
     } else {
       this.genresToFind = this.genresToFind.filter(g => g.id !== genre.id);
+      this.setIsSelectedForSubGenres(genre, false);
     }
   }
 
   filterGamesAfterDelete(id: number) {
     this.games = this.games.filter(g => g.id !== id);
+  }
+
+  setIsSelectedForSubGenres(genre: Genre, value: boolean) {
+    if (genre.subGenres) {
+      for (let subGenre of genre.subGenres) {
+        subGenre.isSelected = value;
+      }
+    }
   }
 }

@@ -6,10 +6,12 @@
       </div>
       <div class="choose-genre" *ngIf="tagIsPressed">
         <div class="item" *ngFor="let g of genres">
-          <input (change)="onChangeGenre(g)" name="{{ g.name }}" type="checkbox" id="{{g.name}}">
+          <input (change)="onChangeGenre(g)" name="{{g.name}}" type="checkbox" id="{{g.name}}">
           <label for="{{g.name}}">{{g.name}}</label>
           <div class="sub-genre" *ngFor="let sub of g.subGenres">
-            <input (change)="onChangeGenre(sub)" name="{{ sub.name }}" type="checkbox" id="{{g.name}}">
+            <input (change)="onChangeGenre(sub)" name="{{sub.name}}"
+                   type="checkbox" id="{{sub.name}}"
+                   [checked]="sub.isSelected">
             <label for="{{sub.name}}">{{sub.name}}</label>
           </div>
         </div>
