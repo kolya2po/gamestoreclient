@@ -39,14 +39,23 @@ export class AddCommentComponent implements OnInit {
   }
 
   addToGame(comment: Comment) {
-     comment.author = this.us.user.userName;
-     if (this.parentCommentId !== 0) {
-       let parent = this.game.comments?.find(c => c.id === this.parentCommentId);
-       parent!.replies!.push(comment);
-       return;
+     comment.author = this.us.user.userName ?? 'Guest';
+     if (this.parentCommentId === 0) {
+       this.game.comments?.push(comment);
+        return;
      }
 
-     this.game.comments?.push(comment);
+    let parentInReplies = this.game.comments?.flatMap(c => c.replies!)
+      .find(r => r.id === this.parentCommentId);
+
+    if (parentInReplies !== null) {
+      parentInReplies!.replies!.push(comment);
+      return;
+    }
+
+    let parent = this.game.comments?.find(c => c.id === this.parentCommentId);
+    parent!.replies!.push(comment);
+    return;
   }
 
   cancel() {

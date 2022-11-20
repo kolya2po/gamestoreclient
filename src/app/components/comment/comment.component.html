@@ -12,8 +12,8 @@
       <p *ngIf="comment.isDeleting" class="save-delete" (click)="hideComment(comment)">Save</p>
     </div>
     <div class="reply">
-      <p class="rep" (click)="comment.isReplying = !comment.isReplying;">Reply</p>
-      <div class="mode" *ngIf="us.user.id !== undefined">
+      <p class="rep" *ngIf="us.user.id !== undefined" (click)="comment.isReplying = !comment.isReplying;">Reply</p>
+      <div class="mode" *ngIf="us.user.id !== undefined && comment.author === us.user.userName">
         <div class="edit" (click)="comment.isEditing = !comment.isEditing;">
           <span class="material-symbols-outlined">edit</span>
           <p>Edit</p>
@@ -32,7 +32,7 @@
     <p>Restore</p>
   </div>
 </div>
-<div style="margin-left: 2%;" class="comment" *ngFor="let r of comment.replies">
+<!--<div style="margin-left: 2%;" class="comment" *ngFor="let r of comment.replies">
   <div class="content" *ngIf="!r.isVisible">
     <div class="user">
       <div class="left">
@@ -65,4 +65,4 @@
   <div class="restore" *ngIf="r.isVisible" (click)="restore(r)">
     <p>Restore</p>
   </div>
-</div>
+</div>-->

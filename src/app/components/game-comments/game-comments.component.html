@@ -1,9 +1,21 @@
-<div class="add-comment" *ngIf="us.user.id !== undefined">
+<div class="add-comment">
   <p (click)="isAdding = !isAdding">Comment</p>
 </div>
 <app-add-comment *ngIf="isAdding" [game]="game" (isAdded)="isAdding = $event"></app-add-comment>
-<div class="comments">
-    <app-comment *ngFor="let c of game?.comments" [comment]="c" [game]="game"
+<div class="comments" *ngFor="let c of game?.comments">
+    <app-comment [comment]="c" [game]="game"
     (commentToDel)="changeItemsToDel($event)">
     </app-comment>
+    <div class="replies" *ngFor="let r of c?.replies">
+      <app-comment [comment]="r"
+                   [game]="game"
+                   (commentToDel)="changeItemsToDel($event)">
+      </app-comment>
+      <div class="replies" *ngFor="let rr of r?.replies">
+        <app-comment [comment]="rr"
+                     [game]="game"
+                     (commentToDel)="changeItemsToDel($event)">
+        </app-comment>
+      </div>
+    </div>
 </div>
