@@ -26,6 +26,9 @@
       <p>Add Game</p>
     </div>
   </div>
+  <div *ngIf="loading" class="loading" style="text-align: center">
+    <p>Loading...</p>
+  </div>
   <div class="cards">
     <app-game-card *ngFor="let g of games | searchFilter: search | genresSearchFilter: genresToFind"
     [game]="g" (deleteGameId)="filterGamesAfterDelete($event)"></app-game-card>
