@@ -18,6 +18,7 @@ import {CartService} from "./cart.service";
 export class UsersService {
   private url = 'https://localhost:5001/api/users';
   user: User = new User();
+  isLoggedIn = false;
 
   constructor(private http: HttpClient,
               private cookieService: CookieService,
@@ -29,7 +30,10 @@ export class UsersService {
     if (cookieService.get('id')) {
       let id = +cookieService.get('id');
       this.getById(id)
-        .subscribe(u => this.user = u);
+        .subscribe(u => {
+          this.user = u;
+          this.isLoggedIn = true;
+        });
     }
   }
 
@@ -58,6 +62,8 @@ export class UsersService {
         this.cs.update().subscribe(() => {
           this.cs.get();
         });
+        this.isLoggedIn = true;
+
         this.router.navigate(['']);
       });
   }
@@ -77,6 +83,8 @@ export class UsersService {
         }
         this.handleReturnedDto(dto);
         this.cs.get();
+        this.isLoggedIn = true;
+
         this.routeExt.navigateToPrev();
       });
   }
@@ -87,6 +95,7 @@ export class UsersService {
         this.user = new User();
         this.clearCookiesAndStorage();
         this.cs.get();
+        this.isLoggedIn = false;
         this.router.navigate(['/'])
       });
   }

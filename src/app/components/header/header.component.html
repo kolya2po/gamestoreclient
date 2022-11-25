@@ -10,7 +10,7 @@
     <p>Support</p>
   </div>
   <div class="right">
-    <div class="user" *ngIf="us.user?.id !== undefined" [routerLink]="'edit-user'">
+    <div class="user" *ngIf="us.isLoggedIn" [routerLink]="'edit-user'">
       <img [src]="us.user.avatarImagePath" alt="">
       <p>{{us.user!.firstName}}</p>
       <p>{{us.user!.lastName}}</p>
@@ -19,10 +19,10 @@
       <span class="material-symbols-outlined">shopping_cart</span>
       <p>{{cs.cart.totalItems}}</p>
     </div>
-    <div class="logout" *ngIf="us.user?.id !== undefined" (click)="us.logout()">
+    <div class="logout" *ngIf="us.isLoggedIn" (click)="us.logout()">
       <span class="material-symbols-outlined">logout</span>
     </div>
-    <div class="sign-in" *ngIf="us.user?.id === undefined"
+    <div class="sign-in" *ngIf="!us.isLoggedIn"
          [routerLink]="'login'">
       <p>Sign in</p>
     </div>

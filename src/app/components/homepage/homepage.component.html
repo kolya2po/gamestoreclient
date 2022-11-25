@@ -21,7 +21,7 @@
         <input type="text" [(ngModel)]="search">
     </div>
   </div>
-  <div class="add-game" *ngIf="us.user.id !== undefined">
+  <div class="add-game" *ngIf="us.isLoggedIn">
     <div class="add-button" (click)="router.navigate(['add-game'])">
       <p>Add Game</p>
     </div>
