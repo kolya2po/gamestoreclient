@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {Order} from "../models/order/order";
 import {PaymentType} from "../models/order/payment-type";
 import {CartService} from "./cart.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {catchError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +33,15 @@ export class OrdersService {
   confirm() {
     let cartId = +this.cookie.get('cartId');
     return this.http.put(`${this.url}/${cartId}`, this.order)
+      .pipe(catchError(err => {
+        let resp = new HttpErrorResponse(err);
+        this.openSnackBar(resp.error);
+        throw err;
+      }))
       .subscribe(async () => {
-        this.cookie.delete('cartId');
-        this.cookie.delete('orderId');
+        this.clearCookies();
         this.cs.get();
-        this.snackBar.open('Order confirmed');
-        await this.delay(2000);
-        this.snackBar.dismiss();
+        this.openSnackBar('Order confirmed');
         this.router.navigate(['']);
       });
   }
@@ -47,7 +50,14 @@ export class OrdersService {
     return this.http.get<PaymentType[]>(`${this.url}/payment-types`);
   }
 
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+  clearCookies() {
+    this.cookie.delete('cartId');
+    this.cookie.delete('orderId');
+  }
+
+  openSnackBar(message: any) {
+    this.snackBar.open(message, '', {
+      duration: 2000
+    });
   }
 }
