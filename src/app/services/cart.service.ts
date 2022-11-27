@@ -12,7 +12,6 @@ export class CartService {
   private url = 'https://localhost:5001/api/carts';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
-    this.get();
   }
 
   public get() {
@@ -20,7 +19,7 @@ export class CartService {
     return this.http.get<Cart>(`${this.url}/${cartId}`)
       .subscribe(c =>
         {
-          if (!this.cookieService.get('cartId')) {
+          if (cartId === 0) {
             this.cookieService.set('cartId', c.id!.toString())
           }
           this.cart = c;
@@ -29,8 +28,11 @@ export class CartService {
 
   public addGame(gameId: number) {
     let cartId = +this.cookieService.get('cartId');
-    return this.http.post(`${this.url}/${cartId}/game/${gameId}`, {})
-      .subscribe(() => {
+    return this.http.post<Cart>(`${this.url}/${cartId}/game/${gameId}`, {})
+      .subscribe((c) => {
+        if (cartId === 0) {
+          this.cookieService.set('cartId', c.id!.toString())
+        }
         this.get();
       });
   }
@@ -39,7 +41,7 @@ export class CartService {
     let cartId = +this.cookieService.get('cartId');
     return this.http.delete(`${this.url}/${cartId}/item/${gameId}`)
       .subscribe(() => {
-        this.get();
+        this.cart.cartItems = this.cart.cartItems?.filter(c => c.gameId !== gameId);
       });
   }
 

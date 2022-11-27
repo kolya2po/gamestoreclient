@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService} from "../../services/cart.service";
 import {CartItem} from "../../models/cart/cart-item";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-cart-page',
@@ -10,7 +11,8 @@ import {Router} from "@angular/router";
 })
 export class CartPageComponent implements OnInit, OnDestroy {
 
-  constructor(public cs: CartService, public router: Router) { }
+  constructor(public cs: CartService, public router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnDestroy(): void {
     this.cs.update()
@@ -21,6 +23,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     window.onbeforeunload = () => this.ngOnDestroy();
+    this.cs.get();
   }
 
   increase(item: CartItem) {
@@ -34,5 +37,13 @@ export class CartPageComponent implements OnInit, OnDestroy {
     }
     item.quantity!--;
     this.cs.cart.totalPrice! -= item.game?.price!;
+  }
+
+  proceed() {
+    if (this.cs.cart.cartItems?.length === 0) {
+      this.snackBar.open('Cart is empty.', 'Ok');
+      return;
+    }
+    this.router.navigate(['order']);
   }
 }

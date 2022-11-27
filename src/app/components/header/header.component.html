@@ -17,7 +17,7 @@
     </div>
     <div class="cart" [routerLink]="'cart'">
       <span class="material-symbols-outlined">shopping_cart</span>
-      <p>{{cs.cart.totalItems}}</p>
+      <p>{{cs.cart.totalItems ?? 0}}</p>
     </div>
     <div class="logout" *ngIf="us.isLoggedIn" (click)="us.logout()">
       <span class="material-symbols-outlined">logout</span>
