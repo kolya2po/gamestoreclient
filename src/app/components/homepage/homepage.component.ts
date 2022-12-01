@@ -17,6 +17,7 @@ export class HomepageComponent implements OnInit {
   genresToFind: Genre[] = [];
   tagIsPressed = false;
   search = '';
+  loading: boolean = true;
 
   constructor(private gs: GamesService,
               private genresService: GenresService,
@@ -24,7 +25,10 @@ export class HomepageComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit(): void {
-    this.gs.getAll().subscribe((data: Game[]) => this.games = data);
+    this.gs.getAll().subscribe((data: Game[]) => {
+      this.games = data;
+      this.loading = false;
+    });
     this.genresService.getAll().subscribe((data: Genre[]) => this.genres = data);
   }
 

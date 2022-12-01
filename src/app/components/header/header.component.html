@@ -1,29 +1,29 @@
 <div class="container">
-  <div class="logo" (click)="router.navigate([''])">
+  <div class="logo" [routerLink]="''">
     <span class="material-symbols-outlined">stars</span>
     <p>Game store</p>
   </div>
   <div class="links">
-    <p (click)="router.navigate([''])">Games</p>
+    <p [routerLink]="''">Games</p>
     <p>Community</p>
     <p>About</p>
     <p>Support</p>
   </div>
   <div class="right">
-    <div class="user" *ngIf="us.user?.id !== undefined" (click)="router.navigate(['edit-user'])">
+    <div class="user" *ngIf="us.isLoggedIn" [routerLink]="'edit-user'">
       <img [src]="us.user.avatarImagePath" alt="">
       <p>{{us.user!.firstName}}</p>
       <p>{{us.user!.lastName}}</p>
     </div>
-    <div class="cart" (click)="router.navigate(['cart'])">
+    <div class="cart" [routerLink]="'cart'">
       <span class="material-symbols-outlined">shopping_cart</span>
-      <p>{{cs.cart.totalItems}}</p>
+      <p>{{cs.cart.totalItems ?? 0}}</p>
     </div>
-    <div class="logout" *ngIf="us.user?.id !== undefined" (click)="us.logout()">
+    <div class="logout" *ngIf="us.isLoggedIn" (click)="us.logout()">
       <span class="material-symbols-outlined">logout</span>
     </div>
-    <div class="sign-in" *ngIf="us.user?.id === undefined"
-         (click)="router.navigate(['login'])">
+    <div class="sign-in" *ngIf="!us.isLoggedIn"
+         [routerLink]="'login'">
       <p>Sign in</p>
     </div>
   </div>

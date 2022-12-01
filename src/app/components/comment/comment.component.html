@@ -12,8 +12,8 @@
       <p *ngIf="comment.isDeleting" class="save-delete" (click)="hideComment(comment)">Save</p>
     </div>
     <div class="reply">
-      <p class="rep" *ngIf="us.user.id !== undefined" (click)="comment.isReplying = !comment.isReplying;">Reply</p>
-      <div class="mode" *ngIf="us.user.id !== undefined && comment.author === us.user.userName">
+      <p class="rep" *ngIf="us.isLoggedIn" (click)="comment.isReplying = !comment.isReplying;">Reply</p>
+      <div class="mode" *ngIf="us.isLoggedIn && comment.author === us.user.userName">
         <div class="edit" (click)="comment.isEditing = !comment.isEditing;">
           <span class="material-symbols-outlined">edit</span>
           <p>Edit</p>
@@ -32,37 +32,6 @@
     <p>Restore</p>
   </div>
 </div>
-<!--<div style="margin-left: 2%;" class="comment" *ngFor="let r of comment.replies">
-  <div class="content" *ngIf="!r.isVisible">
-    <div class="user">
-      <div class="left">
-        <span class="material-symbols-outlined">person</span>
-        <p>{{r.author}}</p>
-      </div>
-      <p class="date">{{r.creationDate | date:'short'}}</p>
-    </div>
-    <div class="text">
-      <p *ngIf="!r.isDeleting">{{r.text}}</p>
-      <p *ngIf="r.isDeleting" class="save-delete" (click)="hideComment(r)">Save</p>
-    </div>
-    <div class="reply">
-      <p class="rep" (click)="r.isReplying = !r.isReplying;">Reply</p>
-      <div class="mode">
-        <div class="edit" (click)="r.isEditing = !r.isEditing;">
-          <span class="material-symbols-outlined">edit</span>
-          <p>Edit</p>
-        </div>
-        <div class="delete" (click)="r.isDeleting = !r.isDeleting">
-          <span class="material-symbols-outlined">delete</span>
-          <p class="delete">Delete</p>
-        </div>
-      </div>
-    </div>
-    <app-add-comment *ngIf="r.isReplying" [game]="game" (isAdded)="r.isReplying = $event"
-                     [parentCommentId]="r.id!"></app-add-comment>
-    <app-edit-comment *ngIf="r.isEditing" [comment]="r" (isEdited)="r.isEditing = $event"></app-edit-comment>
-  </div>
-  <div class="restore" *ngIf="r.isVisible" (click)="restore(r)">
-    <p>Restore</p>
-  </div>
-</div>-->
+<div style="margin-left: 2%">
+  <ng-content></ng-content>
+</div>
