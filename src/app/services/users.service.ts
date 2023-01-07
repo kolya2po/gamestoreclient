@@ -7,16 +7,16 @@ import {LoginModel} from "../models/user/loginModel";
 import {CookieService} from "ngx-cookie-service";
 import {RouterExtensionService} from "./router-extension.service";
 import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError, tap} from "rxjs";
 import {ImagePathDto} from "../models/imagePathDto";
 import {CartService} from "./cart.service";
+import {USERS_URLS} from "../routes/api-routes";
+import {SnackBarService} from "./snack-bar.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private url = 'https://localhost:5001/api/users';
   user: User = new User();
   isLoggedIn = false;
 
@@ -24,7 +24,7 @@ export class UsersService {
               private cookieService: CookieService,
               private routeExt: RouterExtensionService,
               private router: Router,
-              private snackBar: MatSnackBar,
+              private snackBar: SnackBarService,
               private cs: CartService)
   {
     if (cookieService.get('id')) {
@@ -38,21 +38,21 @@ export class UsersService {
   }
 
   public getById(id: number) {
-    return this.http.get<User>(`${this.url}/${id}`)
+    return this.http.get<User>(`${USERS_URLS.DEFAULT_URL}/${id}`)
   }
 
   public addAvatar(image: File) {
     const formData = new FormData();
     formData.append('avatar', image);
-    return this.http.post<ImagePathDto>(`${this.url}/${this.user.id}/avatar`, formData);
+    return this.http.post<ImagePathDto>(`${USERS_URLS.DEFAULT_URL}/${this.user.id}/avatar`, formData);
   }
 
   public register(model: RegistrationModel) {
-    return this.http.post<UserDto>(this.url + '/register', model)
+    return this.http.post<UserDto>(USERS_URLS.REGISTER, model)
       .pipe(tap(() => {
       }), catchError((err) => {
         let resp = new HttpErrorResponse(err);
-        this.openSnackBar(resp.error);
+        this.snackBar.openSnackBar(resp.error);
         throw err;
       }))
       .subscribe(dto => {
@@ -69,11 +69,11 @@ export class UsersService {
   }
 
   public login(model: LoginModel) {
-    return this.http.post<UserDto>(`${this.url}/login`, model)
+    return this.http.post<UserDto>(USERS_URLS.LOGIN, model)
       .pipe(tap(() => {
       }), catchError((err) => {
         let resp = new HttpErrorResponse(err);
-        this.openSnackBar(resp.error);
+        this.snackBar.openSnackBar(resp.error);
         throw err;
       }))
       .subscribe((dto) => {
@@ -90,7 +90,7 @@ export class UsersService {
   }
 
   logout() {
-    return this.http.get(`${this.url}/sign-out`)
+    return this.http.get(USERS_URLS.LOGOUT)
       .subscribe(() => {
         this.user = new User();
         this.clearCookiesAndStorage();
@@ -119,12 +119,6 @@ export class UsersService {
     this.cookieService.set('auth_token', dto.token!,
       new Date(new Date().setHours(new Date().getHours() + 3)));
     this.cookieService.set('id', dto.userId.toString());
-  }
-
-  openSnackBar(message: any) {
-    this.snackBar.open(message, '', {
-      duration: 2000
-    });
   }
 
   clearCookiesAndStorage() {

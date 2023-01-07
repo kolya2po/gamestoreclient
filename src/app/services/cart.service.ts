@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Cart} from "../models/cart/cart";
 import {CookieService} from "ngx-cookie-service";
+import {CART_URL} from "../routes/api-routes";
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,12 @@ import {CookieService} from "ngx-cookie-service";
 export class CartService {
   cart: Cart = new Cart();
 
-  private url = 'https://localhost:5001/api/carts';
-
   constructor(private http: HttpClient, private cookieService: CookieService) {
   }
 
   public get() {
     let cartId = +this.cookieService.get('cartId');
-    return this.http.get<Cart>(`${this.url}/${cartId}`)
+    return this.http.get<Cart>(`${CART_URL}/${cartId}`)
       .subscribe(c =>
         {
           if (cartId === 0) {
@@ -28,7 +27,7 @@ export class CartService {
 
   public addGame(gameId: number) {
     let cartId = +this.cookieService.get('cartId');
-    return this.http.post<Cart>(`${this.url}/${cartId}/game/${gameId}`, {})
+    return this.http.post<Cart>(`${CART_URL}/${cartId}/game/${gameId}`, {})
       .subscribe((c) => {
         if (cartId === 0) {
           this.cookieService.set('cartId', c.id!.toString())
@@ -39,13 +38,13 @@ export class CartService {
 
   public removeGame(gameId: number) {
     let cartId = +this.cookieService.get('cartId');
-    return this.http.delete(`${this.url}/${cartId}/item/${gameId}`)
+    return this.http.delete(`${CART_URL}/${cartId}/item/${gameId}`)
       .subscribe(() => {
         this.cart.cartItems = this.cart.cartItems?.filter(c => c.gameId !== gameId);
       });
   }
 
   public update() {
-    return this.http.put(this.url, this.cart);
+    return this.http.put(CART_URL, this.cart);
   }
 }
